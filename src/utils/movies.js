@@ -1,6 +1,6 @@
 
 function getMovies(){
-    return fetch('http://localhost:8080/movies')
+    return fetch('http://localhost:8000/movies')
     .then(response => response.json())
     .then(data => {
         console.log(data)
