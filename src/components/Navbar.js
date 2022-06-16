@@ -16,7 +16,7 @@ const Navbar = () => {
     useEffect ( () => {
       window.addEventListener ('scroll', handleScrollHeight)
            
-    }, [] )
+    }, [""] )
 
     return (
        
@@ -52,18 +52,3 @@ const Navbar = () => {
 
 export default Navbar;
 
-
-
-
-// const [color, setColor] = useState ("transparent")
-//     const listenScrollEvent = () => {
-//        window.scrollY > 10 ? setColor ("#E4E4E4") : setColor ("transparent");
-//        window.scrollY > 10 ? setnavSize ("5rem")  : setnavSize ("10rem");
-//      };
-
-//      useEffect( () => {
-//      window.addEventListener("scroll", listenScrollEvent);
-//         return () => {
-//             window.removeEventListener("scroll", listenScrollEvent);
-//         };
-//     }, []);
