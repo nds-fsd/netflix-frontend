@@ -25,16 +25,16 @@ const Navbar = () => {
                         <h1> <span className="logo1">FAKE</span><span className="logo2">FLIX</span> </h1>
                         <ul className="lista">
                             <li>
-                                <Link to="Home"> Home </Link>
+                                <Link to="home"> Home </Link>
                             </li>
                             <li>
-                                <Link to ="Movies"> Movies </Link>
+                                <Link to ="movies"> Movies </Link>
                             </li>
                             <li>
-                                 <Link to ="News"> News </Link>
+                                 <Link to ="news"> News </Link>
                             </li>
                             <li>
-                                 <Link to="MyList"> My list </Link>
+                                 <Link to="mylist"> My list </Link>
                             </li>
                         </ul>   
                 <div className="search">
