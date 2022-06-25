@@ -8,7 +8,6 @@ function Home() {
   const [movies, setMovies] = useState([])
   const [refresh, setRefresh] = useState(false)
 
-
   const refreshListMovies = () => {
     setRefresh(!refresh)
   }
@@ -19,24 +18,33 @@ function Home() {
   }
   useEffect(() => {
     getMoviesFromApi()
-  }, [refresh]);
+  }, [refresh])
 
-
-return (
+  return (
     <div>
       <div className='filmContainer'>
-        {movies.map(({ prj_title, prj_urlImgMovie, prj_urlImgModal, prj_description, prj_rating, prj_runtime }) =>
-          <Card refreshListMovies={() => refreshListMovies()}
-            urlImgMovieCard={prj_urlImgMovie}
-            title={prj_title}
-            urlImgModal={prj_urlImgModal}
-            movieDescription={prj_description}
-            movieRating={prj_rating}
-            movieRuntime={prj_runtime}
-          />)}
+        {movies.map(
+          ({
+            prj_title,
+            prj_urlImgMovie,
+            prj_urlImgModal,
+            prj_description,
+            prj_rating,
+            prj_runtime,
+          }) => (
+            <Card
+              refreshListMovies={() => refreshListMovies()}
+              urlImgMovieCard={prj_urlImgMovie}
+              title={prj_title}
+              urlImgModal={prj_urlImgModal}
+              movieDescription={prj_description}
+              movieRating={prj_rating}
+              movieRuntime={prj_runtime}
+            />
+          )
+        )}
       </div>
     </div>
   )
-
 }
-export default Home;
+export default Home
