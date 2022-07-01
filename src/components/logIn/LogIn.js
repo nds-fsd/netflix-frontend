@@ -1,85 +1,128 @@
-import { useState } from 'react'
-
+import { useState, useEffect, useRef, useContext } from 'react'
+import AuthContext from '../../context/AuthProvider'
+import { Link, Navigate, useNavigate } from 'react-router-dom'
 import './index.css'
 
-function LogIn() {
-  const [errorMessages, setErrorMessages] = useState({})
-  const [isSubmitted, setIsSubmitted] = useState(false)
+//! This will match with the backend
+const LOGIN_URL = `${process.env.REACT_APP_BASE_URL}/login`
 
-  //* User info
-  const database = [
-    {
-      username: 'user1',
-      password: 'pass1',
-    },
-    {
-      username: 'user2',
-      password: 'pass2',
-    },
-  ]
+const LogIn = () => {
+  const { setAuth } = useContext(AuthContext)
+  const emailRef = useRef()
+  const errRef = useRef()
 
-  const errors = {
-    uname: 'invalid username',
-    pass: 'invalid password',
-  }
+  const [email, setEmail] = useState('')
+  const [pwd, setPwd] = useState('')
+  const [errMsg, setErrMsg] = useState('')
+  //* This is to navigate to a page of our choice through router
+  const [success, setSuccess] = useState(false)
+  const navigate = useNavigate()
 
-  const handleSubmit = (event) => {
-    //* Prevent page reload
-    event.preventDefault()
-
-    var { uname, pass } = document.forms[0]
-
-    //* Check if the user exist
-    const userData = database.find((user) => user.username === uname.value)
-
-    //* Compare user info
-    if (userData) {
-      if (userData.password !== pass.value) {
-        //* Invalid password
-        setErrorMessages({ name: 'pass', message: errors.pass })
-      } else {
-        setIsSubmitted(true)
-      }
-    } else {
-      //* Username not found
-      setErrorMessages({ name: 'uname', message: errors.uname })
+  useEffect(() => {
+    //* Set the focus when the component loads
+    emailRef.current.focus()
+    let token
+    const loginData = window.localStorage.getItem('userLogin')
+    if (loginData) {
+      token = JSON.parse(loginData)
+      // setAuth(token)
+      navigate('/')
     }
+  }, [])
+
+  //* This is to empty out any Err msg when the user update the state of email || psw
+  useEffect(() => {
+    setErrMsg('')
+  }, [email, pwd])
+
+  //* This is to avoid the reload of the page
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+
+    const body = JSON.stringify({
+      email: email,
+      password: pwd,
+    })
+
+    await fetch(LOGIN_URL, {
+      method: 'POST',
+      body: body,
+      headers: { 'Content-Type': 'application/json' },
+      withCredentials: false,
+    })
+      .then((response) => {
+        return response.json()
+      })
+      .then((data) => {
+        if (data?.message) throw data.message
+        else {
+          // setAuth(data)
+          window.localStorage.setItem('userLogin', JSON.stringify(data))
+          setSuccess(true)
+        }
+      })
+      .catch((e) => {
+        setErrMsg(e)
+        console.error(e)
+      })
   }
-
-  //* Generate error message on field "Name"
-  const renderErrorMessage = (name) =>
-    name === errorMessages.name && (
-      <div className='error'>{errorMessages.message}</div>
-    )
-
-  //* Creating login form
-  const renderForm = (
-    <div className='form'>
-      <form onSubmit={handleSubmit}>
-        <div className='input-container'>
-          <label>Username </label>
-          <input type='text' name='uname' required />
-          {renderErrorMessage('uname')}
-        </div>
-        <div className='input-container'>
-          <label>Password </label>
-          <input type='password' name='pass' required />
-          {renderErrorMessage('pass')}
-        </div>
-        <div className='button-container'>
-          <input type='submit' />
-        </div>
-      </form>
-    </div>
-  )
 
   return (
-    <div className='logIn'>
-      <div className='login-form'>
-        <div className='title'>Sign In</div>
-        {isSubmitted ? <div>User is successfully logged in</div> : renderForm}
-      </div>
-    </div>
+    <>
+      {success ? (
+        <section>
+          <h1>You are logged in!</h1> <br />
+          <p>
+            <a href='#'>Go to home</a>
+          </p>
+        </section>
+      ) : (
+        <section>
+          <p
+            ref={errRef}
+            className={errMsg ? 'errmsg' : 'offscreen'}
+            aria-live='assertive'
+          >
+            {errMsg}
+          </p>
+          <h1>Sign in</h1>
+          <form onSubmit={handleSubmit}>
+            <label htmlFor='email'>Email:</label>
+            <input
+              type='text'
+              // htmlFor must match with the id!
+              id='email'
+              ref={emailRef}
+              autoComplete='off'
+              onChange={(e) => setEmail(e.target.value)}
+              // This will clear the input uppon submition
+              value={email}
+              required
+            />
+            <label htmlFor='password'>Password:</label>
+            <input
+              type='password'
+              // htmlFor must match with the id!
+              id='password'
+              autoComplete='off'
+              onChange={(e) => setPwd(e.target.value)}
+              // This will clear the input uppon submition
+              value={pwd}
+              required
+            />
+            <button>Sign in</button>
+            <p>
+              Need an Account?
+              <br />
+              {/* Router link to register */}
+              <span className='line'>
+                <a href='#'>Sign Up!</a>
+              </span>
+            </p>
+          </form>
+        </section>
+      )}
+    </>
   )
 }
 
