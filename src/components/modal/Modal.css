@@ -19,7 +19,7 @@
     background-color: rgba(0, 0, 0, 0.85);
     width: 40%;
     height: 80vh;
-    border-radius: px;
+    border-radius: 25px;
     color: #ffffff;
     z-index: 10000;
     border-radius: 20px;
@@ -55,25 +55,25 @@
 
 .closeModal{
     position: absolute;
-    top: 10px;
-    right: 10px;
-    width: 50px;
+    width:  100px;
     height: 50px;
-    background-color: transparent;
-    border-radius: 50%;
-    border: none;
+    
+    background-color: #FCA311;
+    top: 0;
+    right: 0px;
+    border-radius: 0px 20px 0px 25px;
+    color: rgb(185, 29, 29);
+    font-size: 2.5vh;
     text-align: center;
     line-height: 50px;
-    font-size: 30px;
-    color: #000;
     cursor: pointer;
     z-index: 1000;
+    transition: all 1s ease-in-out;
 }
 
 .closeModal:hover{
-    background-color: rgb(255, 255, 255);
-    transition: all 1s;
-    color: white;
+    transition: all 1s ease-in-out;
+    background-color: #e79e27;
 }
 
 .yellowRating{

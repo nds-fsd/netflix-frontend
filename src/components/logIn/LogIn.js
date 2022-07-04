@@ -73,7 +73,7 @@ const LogIn = () => {
         <section>
           <h1>You are logged in!</h1> <br />
           <p>
-            <a href='#'>Go to home</a>
+            <a href='/'>Go to home</a>
           </p>
         </section>
       ) : (

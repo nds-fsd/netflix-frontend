@@ -17,11 +17,14 @@ const Navbar = () => {
   return (
     <div className='container'>
       <nav className={scrollHeight > 20 ? 'nav' : 'nav-2'}>
-        <h1>
-          {' '}
-          <span className='logo1'>FAKE</span>
-          <span className='logo2'>FLIX</span>{' '}
-        </h1>
+
+        <div className='container_logo'>
+          <h1>
+            <span className='logo1'>FAKE</span>
+            <span className='logo2'>FLIX</span>{' '}
+          </h1>
+        </div>
+        
         <ul className='lista'>
           <li>
             <Link to='home'> Home </Link>
@@ -39,10 +42,13 @@ const Navbar = () => {
             <Link to='login'> Log In </Link>
           </li>
         </ul>
-        <div className='search'>
-          <input type='search' placeholder='Search your movie'></input>
+        <div className='container_search'>
+          <input type='text' placeholder='Search your title 🔍' />
         </div>
-        <button className='button'>Search</button>
+        <div className='container_button'>
+          <button className='button'>Search</button>
+        </div>
+        
       </nav>
       <Outlet />
     </div>

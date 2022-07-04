@@ -31,7 +31,8 @@ const Modal = ({ imgModal, title, closeModal, description, movieRuntime , movieR
             
             <div className='wrapperModal'>
                 <img src={imgModal} alt={" "} />
-                <button className='closeModal' onClick={closeModal}>❌</button>
+                
+                <div className='closeModal' onClick={closeModal}>❌</div>
                 <h2>{title}</h2>
                 <p>{description}</p>
                 <p className='runtimeMovie'>{movieRuntime}</p>

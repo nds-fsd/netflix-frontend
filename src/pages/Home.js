@@ -1,7 +1,7 @@
 import React from 'react'
-import Card from '../../components/card/Card'
-import '../../components/card/Card.css'
-import { getMovies } from '../../utils/movies'
+import Card from '../components/card/Card'
+import '../components/card/Card.css'
+import { getMovies } from '../utils/movies'
 import { useState, useEffect } from 'react'
 
 function Home() {
@@ -13,17 +13,18 @@ function Home() {
   }
 
   const getMoviesFromApi = async () => {
-    const movies = await getMovies()
-    setMovies(movies)
+    const moviesFetched = await getMovies()
+    setMovies(moviesFetched)
   }
+  
   useEffect(() => {
     getMoviesFromApi()
   }, [refresh])
-
   return (
     <div>
+      HOME
       <div className='filmContainer'>
-        {movies.map(
+        {movies && movies.map(
           ({
             prj_title,
             prj_urlImgMovie,
@@ -47,4 +48,4 @@ function Home() {
     </div>
   )
 }
-export default Home
+export default Home;

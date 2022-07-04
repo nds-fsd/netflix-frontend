@@ -1,6 +1,6 @@
 import React from 'react'
 import './Card.css'
-import {useState} from 'react'
+import { useState } from 'react'
 import Modal from '../modal/Modal'
 
 const Card = ({ urlImgMovieCard, title, urlImgModal, movieDescription , movieRating, movieRuntime}) => {
