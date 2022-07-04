@@ -1,13 +1,11 @@
-import { useState, useEffect, useRef, useContext } from 'react'
-import AuthContext from '../../context/AuthProvider'
-import { Link, Navigate, useNavigate } from 'react-router-dom'
+import { useState, useEffect, useRef } from 'react'
+import {Navigate, useNavigate} from 'react-router-dom'
 import './index.css'
+import {hasUserSession, setUserSession} from "../../utils/sesion";
+import api from "../../utils/api";
 
-//! This will match with the backend
-const LOGIN_URL = `${process.env.REACT_APP_BASE_URL}/login`
 
 const LogIn = () => {
-  const { setAuth } = useContext(AuthContext)
   const emailRef = useRef()
   const errRef = useRef()
 
@@ -15,19 +13,11 @@ const LogIn = () => {
   const [pwd, setPwd] = useState('')
   const [errMsg, setErrMsg] = useState('')
   //* This is to navigate to a page of our choice through router
-  const [success, setSuccess] = useState(false)
   const navigate = useNavigate()
 
   useEffect(() => {
     //* Set the focus when the component loads
     emailRef.current.focus()
-    let token
-    const loginData = window.localStorage.getItem('userLogin')
-    if (loginData) {
-      token = JSON.parse(loginData)
-      // setAuth(token)
-      navigate('/')
-    }
   }, [])
 
   //* This is to empty out any Err msg when the user update the state of email || psw
@@ -39,45 +29,21 @@ const LogIn = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    const body = JSON.stringify({
-      email: email,
-      password: pwd,
-    })
+    const body = {email, password: pwd};
 
-    await fetch(LOGIN_URL, {
-      method: 'POST',
-      body: body,
-      headers: { 'Content-Type': 'application/json' },
-      withCredentials: false,
+    api("POST", 'login', {body}).then(userSession => {
+      setUserSession(userSession);
+      navigate('/home');
+    }).catch(e =>{
+      setErrMsg(e.message)
+      console.error(e)
     })
-      .then((response) => {
-        return response.json()
-      })
-      .then((data) => {
-        if (data?.message) throw data.message
-        else {
-          // setAuth(data)
-          window.localStorage.setItem('userLogin', JSON.stringify(data))
-          setSuccess(true)
-        }
-      })
-      .catch((e) => {
-        setErrMsg(e)
-        console.error(e)
-      })
   }
 
   return (
     <>
-      {success ? (
-        <section>
-          <h1>You are logged in!</h1> <br />
-          <p>
-            <a href='/'>Go to home</a>
-          </p>
-        </section>
-      ) : (
-        <section>
+      {hasUserSession() && <Navigate to="/home" replace />}
+      {!hasUserSession() && (<section>
           <p
             ref={errRef}
             className={errMsg ? 'errmsg' : 'offscreen'}
@@ -112,11 +78,8 @@ const LogIn = () => {
             />
             <button>Sign in</button>
             <p>
-              Need an Account?
-              <br />
-              {/* Router link to register */}
-              <span className='line'>
-                <a href='#'>Sign Up!</a>
+              Need an Account? <span className='line'>
+                <a style={{cursor : 'pointer'}} onClick={() => navigate('/register')}>Sign Up!</a>
               </span>
             </p>
           </form>

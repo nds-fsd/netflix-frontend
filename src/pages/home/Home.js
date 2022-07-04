@@ -1,8 +1,9 @@
 import React from 'react'
-import Card from '../components/card/Card'
-import '../components/card/Card.css'
-import { getMovies } from '../utils/movies'
+import Card from '../../components/card/Card'
+import '../../components/card/Card.css'
+import { getMovies } from '../../utils/movies'
 import { useState, useEffect } from 'react'
+import api from "../../utils/api";
 
 function Home() {
   const [movies, setMovies] = useState([])
@@ -11,14 +12,9 @@ function Home() {
   const refreshListMovies = () => {
     setRefresh(!refresh)
   }
-
-  const getMoviesFromApi = async () => {
-    const moviesFetched = await getMovies()
-    setMovies(moviesFetched)
-  }
   
   useEffect(() => {
-    getMoviesFromApi()
+    api("GET", 'movies').then((movies) => setMovies(movies));
   }, [refresh])
   return (
     <div>
