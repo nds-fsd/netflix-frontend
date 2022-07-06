@@ -1,14 +1,30 @@
+import API_URL from  './api';
 
-function getMovies(){
-    return fetch('http://localhost:8000/movies')
-    .then(response => response.json())
-    .then(data => {
-        console.log(data)
-        return data
+
+
+let dataFetched;
+const getMovies = async () => {
+  const getTokenFromLocalStorage = JSON.parse(window.localStorage.getItem("userLogin"))
+  const { token } = getTokenFromLocalStorage;
+  const options = {
+    method: 'GET',
+    headers: {
+      authorization: 'Bearer ' + token
+    }
+  }
+  const urlTofetch = API_URL + '/movies'
+
+  
+  await fetch(urlTofetch, options)
+    .then((res) => res.json())
+    .then((data) => {
+      dataFetched = data
+      return dataFetched;
+      
     })
-    .catch(error => console.log(error))
+    .catch((err) => console.log(err))
+    return dataFetched
 }
 
-export {
-    getMovies
-}
+export { getMovies }
+
