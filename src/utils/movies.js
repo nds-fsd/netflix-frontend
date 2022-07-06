@@ -1,5 +1,6 @@
+import API_URL from  './api';
 
-//  caution Bearer needs a blankspace after last r to be functional.
+
 
 let dataFetched;
 const getMovies = async () => {
@@ -11,7 +12,9 @@ const getMovies = async () => {
       authorization: 'Bearer ' + token
     }
   }
-  const urlTofetch = 'http://localhost:3001/movies'
+  const urlTofetch = API_URL + '/movies'
+
+  
   await fetch(urlTofetch, options)
     .then((res) => res.json())
     .then((data) => {

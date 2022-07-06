@@ -13,9 +13,11 @@ function Home() {
     setRefresh(!refresh)
   }
   
+  
   useEffect(() => {
     api("GET", 'movies').then((movies) => setMovies(movies));
   }, [refresh])
+  
   return (
     <div>
       HOME
