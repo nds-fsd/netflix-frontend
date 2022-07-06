@@ -1,24 +1,27 @@
 import React from 'react'
 import './Modal.css'
+import FavButton from '../favButton/FavButton'
 
-const Modal = ({ imgModal, title, closeModal, description, movieRuntime , movieRating}) => {
+
+const Modal = ({ imgModal, title, closeModal, description, movieRuntime , movieRating, setMylist, stateFav}) => {
+
 
     const colorFilmRating = (movieRating) =>{
         switch(movieRating){
             case '12+':
-                return <p className='yellowRating bold'>{movieRating}</p>
+                return <p className='yellowRating bold defaultRating'>{movieRating}</p>
                 break;
             case '0+':
-                return <p className='greenRating bold'>{movieRating}</p>
+                return <p className='greenRating bold defaultRating'>{movieRating}</p>
                 break;
             case '7+':
-                return <p className='blueRating bold'>{movieRating}</p>
+                return <p className='blueRating bold defaultRating'>{movieRating}</p>
                 break;
             case '16+':
-                return <div className='orangeRating bold'>{movieRating}</div>
+                return <div className='orangeRating bold defaultRating'>{movieRating}</div>
                 break;
             case '18+':
-                return <p className='redRating bold'>{movieRating}</p>
+                return <p className='redRating bold defaultRating'>{movieRating}</p>
                 break;
             default:
                 return <p>{movieRating}</p>
@@ -31,14 +34,18 @@ const Modal = ({ imgModal, title, closeModal, description, movieRuntime , movieR
             
             <div className='wrapperModal'>
                 <img src={imgModal} alt={" "} />
-                <button className='closeModal' onClick={closeModal}>❌</button>
+                
+                <div className='closeModal' onClick={closeModal}>❌</div>
                 <h2>{title}</h2>
                 <p>{description}</p>
                 <p className='runtimeMovie'>{movieRuntime}</p>
                 <div className='wrapperRating'>
                     <p>Rating: </p>
+                    
                     <p>{colorFilmRating(movieRating)}</p>
+                    <FavButton setFav={setMylist} favState={stateFav}/>
                     <button className='playFilm'>PLAY 🎥</button>
+                    
                 </div>
                 
             </div>
