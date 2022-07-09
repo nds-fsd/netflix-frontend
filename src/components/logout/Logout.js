@@ -35,7 +35,7 @@ const LogoutBtn = ({ clickLogout }) => {
             aria-haspopup='true'
             aria-expanded={open ? 'true' : undefined}
           >
-            //* Avatar component receive the letter function
+            {/* Avatar component receive the letter function*/}
             <Avatar sx={{ width: 32, height: 32 }}>{userLetter}</Avatar>
           </IconButton>
         </Tooltip>
@@ -75,7 +75,7 @@ const LogoutBtn = ({ clickLogout }) => {
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
-        //* event must be added to the wrapper, otherwise it won't work
+        {/* event must be added to the wrapper, otherwise it won't work*/}
         <MenuItem onClick={clickLogout}>
           <ListItemIcon>
             <Logout fontSize='small' />
