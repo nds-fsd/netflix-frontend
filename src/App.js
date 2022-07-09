@@ -7,7 +7,7 @@ import Movies from './pages/movies/Movies'
 import MyList from './pages/myList/MyList'
 import Register from './pages/register/Register'
 import LogIn from './pages/login/LogIn'
-import {AuthProvider} from "./context/AuthProvider";
+import { AuthProvider } from './context/AuthProvider'
 
 function App() {
   return (
@@ -26,7 +26,6 @@ function App() {
           </Routes>
         </AuthProvider>
         {/* navbar with Scroll */}
-
       </BrowserRouter>
     </div>
   )
