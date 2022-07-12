@@ -1,9 +1,8 @@
 import { useState, useEffect, useRef } from 'react'
-import {Navigate, useNavigate} from 'react-router-dom'
+import { Navigate, useNavigate } from 'react-router-dom'
 import './index.css'
-import {hasUserSession, setUserSession} from "../../utils/sesion";
-import api from "../../utils/api";
-
+import { hasUserSession, setUserSession } from '../../utils/sesion'
+import api from '../../utils/api'
 
 const LogIn = () => {
   const emailRef = useRef()
@@ -29,21 +28,24 @@ const LogIn = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    const body = {email, password: pwd};
+    const body = { email, password: pwd }
 
-    api("POST", 'login', {body}).then(userSession => {
-      setUserSession(userSession);
-      navigate('/home');
-    }).catch(e =>{
-      setErrMsg(e.message)
-      console.error(e)
-    })
+    api('POST', 'login', { body })
+      .then((userSession) => {
+        setUserSession(userSession)
+        navigate('/home')
+      })
+      .catch((e) => {
+        setErrMsg(e.message)
+        console.error(e)
+      })
   }
 
   return (
     <>
-      {hasUserSession() && <Navigate to="/home" replace />}
-      {!hasUserSession() && (<section>
+      {hasUserSession() && <Navigate to='/home' replace />}
+      {!hasUserSession() && (
+        <section>
           <p
             ref={errRef}
             className={errMsg ? 'errmsg' : 'offscreen'}
@@ -78,8 +80,14 @@ const LogIn = () => {
             />
             <button>Sign in</button>
             <p>
-              Need an Account? <span className='line'>
-                <a style={{cursor : 'pointer'}} onClick={() => navigate('/register')}>Sign Up!</a>
+              Need an Account?{' '}
+              <span className='line'>
+                <a
+                  style={{ cursor: 'pointer' }}
+                  onClick={() => navigate('/register')}
+                >
+                  Sign Up!
+                </a>
               </span>
             </p>
           </form>

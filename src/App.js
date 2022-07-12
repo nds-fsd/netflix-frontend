@@ -5,7 +5,7 @@ import Home from './pages/home/Home'
 import News from './pages/news/News'
 import Movies from './pages/movies/Movies'
 import MyList from './pages/myList/MyList'
-import Register from './pages/register/Register'
+import RegisterForm from './pages/register/RegisterForm'
 import LogIn from './pages/login/LogIn'
 import { AuthProvider } from './context/AuthProvider'
 
@@ -16,7 +16,7 @@ function App() {
         <AuthProvider>
           <Routes>
             <Route path='login' element={<LogIn />} />
-            <Route path='register' element={<Register />} />
+            <Route path='register' element={<RegisterForm />} />
             <Route path='/' element={<Navbar />}>
               <Route path='home' element={<Home />} />
               <Route path='movies' element={<Movies />} />

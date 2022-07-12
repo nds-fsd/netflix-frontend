@@ -17,7 +17,7 @@ body {
     /* background-color: dodgerblue; */
 }
 
-.App {
+.login {
   display: flex;
   flex-direction: column;
   justify-content: center;
