@@ -16,13 +16,7 @@
     "statusBarItem.remoteBackground": "#0000ff",
     "statusBarItem.remoteForeground": "#e7e7e7",
     "titleBar.inactiveBackground": "#0000ff99",
-    "titleBar.inactiveForeground": "#e7e7e799",
-    "editorGroup.border": "#3333ff",
-    "panel.border": "#3333ff",
-    "sideBar.border": "#3333ff",
-    "statusBar.debuggingBackground": "#ffff00",
-    "statusBar.debuggingForeground": "#15202b",
-    "tab.activeBorder": "#3333ff"
+    "titleBar.inactiveForeground": "#e7e7e799"
   },
   "peacock.color": "blue"
 }

@@ -3,7 +3,7 @@ import './Modal.css'
 import FavButton from '../favButton/FavButton'
 
 
-const Modal = ({ imgModal, title, closeModal, description, movieRuntime , movieRating, setMylist, stateFav}) => {
+const Modal = ({ imgModal, title, closeModal, description, movieRuntime , movieRating, setMylist, stateFav, id}) => {
 
 
     const colorFilmRating = (movieRating) =>{
@@ -43,7 +43,7 @@ const Modal = ({ imgModal, title, closeModal, description, movieRuntime , movieR
                     <p>Rating: </p>
                     
                     <p>{colorFilmRating(movieRating)}</p>
-                    <FavButton setFav={setMylist} favState={stateFav}/>
+                    <FavButton id={id} setFav={setMylist} favState={stateFav}/>
                     <button className='playFilm'>PLAY 🎥</button>
                     
                 </div>

@@ -33,6 +33,7 @@ const LogIn = () => {
 
     api("POST", 'login', {body}).then(userSession => {
       setUserSession(userSession);
+      console.log(userSession);
       navigate('/home');
     }).catch(e =>{
       setErrMsg(e.message)
