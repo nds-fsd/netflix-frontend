@@ -5,11 +5,6 @@ import { getUserSession } from '../../utils/sesion';
 import { movieToFav, removeMovieFromFav } from '../../utils/movies';
 
 
-
-
-
-
-
 const Card = (props) => {
     const { urlImgMovieCard, title, urlImgModal, movieDescription, movieRating, movieRuntime, id } = props;
     const [modalOpen, setModalOpen] = useState(false)

@@ -28,6 +28,7 @@ const Modal = ({ imgModal, title, closeModal, description, movieRuntime , movieR
                 break;
         }
     }
+  }
 
     return (
         <div className='wrapperModalOverlay'>
@@ -50,8 +51,13 @@ const Modal = ({ imgModal, title, closeModal, description, movieRuntime , movieR
                 
             </div>
 
+          <p>{colorFilmRating(movieRating)}</p>
+          <FavButton setFav={setMylist} favState={stateFav} />
+          <button className='playFilm'>PLAY 🎥</button>
         </div>
-    )
+      </div>
+    </div>
+  )
 }
 
 export default Modal
