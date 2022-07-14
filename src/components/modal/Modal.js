@@ -28,7 +28,6 @@ const Modal = ({ imgModal, title, closeModal, description, movieRuntime , movieR
                 break;
         }
     }
-  }
 
     return (
         <div className='wrapperModalOverlay'>
