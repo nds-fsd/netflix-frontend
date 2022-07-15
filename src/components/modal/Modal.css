@@ -90,6 +90,8 @@
     border-radius: 10px;
 }
 
+
+
 .yellowRating{
     background-color: yellow;
     color: #000000;
@@ -135,4 +137,7 @@
     background-color: #FCA311;
     color: white;
     transition: all 0.5s;
+}
+.favStar{
+    margin-top: 30px;
 }

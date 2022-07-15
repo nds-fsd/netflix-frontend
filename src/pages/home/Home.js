@@ -1,9 +1,8 @@
 import React from 'react'
 import Card from '../../components/card/Card'
 import '../../components/card/Card.css'
-import { getMovies } from '../../utils/movies'
 import { useState, useEffect } from 'react'
-import api from "../../utils/api";
+import api from '../../utils/api'
 
 function Home() {
   const [movies, setMovies] = useState([])
@@ -12,7 +11,6 @@ function Home() {
   const refreshListMovies = () => {
     setRefresh(!refresh)
   }
-  
   
   useEffect(() => {
     api("GET", 'movies').then((movies) => setMovies(movies));
@@ -24,6 +22,7 @@ function Home() {
       <div className='filmContainer'>
         {movies && movies.map(
           ({
+            _id,
             prj_title,
             prj_urlImgMovie,
             prj_urlImgModal,
@@ -33,6 +32,7 @@ function Home() {
           }) => (
             <Card
               refreshListMovies={() => refreshListMovies()}
+              id={_id}
               urlImgMovieCard={prj_urlImgMovie}
               title={prj_title}
               urlImgModal={prj_urlImgModal}
