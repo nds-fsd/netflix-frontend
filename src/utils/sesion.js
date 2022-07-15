@@ -5,6 +5,7 @@ import {
 } from './storageHelpers'
 
 export const getUserSession = () => getStorageItem('userSession')
+export const getFavsMovies = () => getStorageItem('favs')
 
 export const setUserSession = (sessionData) =>
   setStorageItem('userSession', sessionData)
@@ -21,6 +22,14 @@ export const getToken = () => {
 export const getUser = () => {
   if (hasUserSession()) {
     return getUserSession().user
+  }
+  return undefined
+}
+
+export const getFavMoviesFromLocalStorage = () => {
+  if (hasUserSession()) {
+    return getFavsMovies()
+    
   }
   return undefined
 }

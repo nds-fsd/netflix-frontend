@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import './Card.css'
 import Modal from '../modal/Modal'
-import { getUserSession } from '../../utils/sesion';
-import { movieToFav, removeMovieFromFav } from '../../utils/movies';
+import { getFavMoviesFromLocalStorage, getUserSession } from '../../utils/sesion';
+import { getFavMovies, movieToFav, removeMovieFromFav } from '../../utils/movies';
 
 
 const Card = (props) => {
@@ -10,22 +10,29 @@ const Card = (props) => {
     const [modalOpen, setModalOpen] = useState(false)
     const [fav, setFav] = useState(false)
 
-    const handleModal = () => {
+    const handleModal = async () => {
         setModalOpen(!modalOpen)
+        getFavMovies(getUserSession())
+        const favs = getFavMoviesFromLocalStorage()
+        if(favs.includes(id)){
+            setFav(true)
+        }
     }
-    
+
 
 
     const handleFavButton = () => {
         const userSession = getUserSession()
         const body = { id: id }
         const movie = body.id
-        if (!fav) {
+        if (fav === false) {
             movieToFav(userSession, body)
-            setFav(!fav)
+            window.localStorage.setItem("favs", JSON.stringify(movie))
+            setFav(true)
         } else {
             removeMovieFromFav(userSession, movie)
-            setFav(!fav)
+            window.localStorage.removeItem("favs", JSON.stringify(movie))
+            setFav(false)
         }
     }
 
