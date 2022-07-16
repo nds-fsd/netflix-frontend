@@ -1,48 +1,47 @@
-import * as React from 'react'
-import Box from '@mui/material/Box'
-import Avatar from '@mui/material/Avatar'
-import Menu from '@mui/material/Menu'
-import MenuItem from '@mui/material/MenuItem'
-import ListItemIcon from '@mui/material/ListItemIcon'
-import IconButton from '@mui/material/IconButton'
-import Tooltip from '@mui/material/Tooltip'
-import Logout from '@mui/icons-material/Logout'
-import { getUser } from '../../utils/sesion'
+import * as React from 'react';
+import Box from '@mui/material/Box';
+import Avatar from '@mui/material/Avatar';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import IconButton from '@mui/material/IconButton';
+import Tooltip from '@mui/material/Tooltip';
+import Logout from '@mui/icons-material/Logout';
+import { getUser } from '../../utils/sesion';
 
 const LogoutBtn = ({ clickLogout }) => {
-  const [anchorEl, setAnchorEl] = React.useState(null)
-  const open = Boolean(anchorEl)
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
   const handleClick = (event) => {
-    setAnchorEl(event.currentTarget)
-  }
+    setAnchorEl(event.currentTarget);
+  };
   const handleClose = () => {
-    setAnchorEl(null)
-  }
+    setAnchorEl(null);
+  };
 
   //* this function defines the first letter of the user
-  const user = getUser()
-  const userLetter = user ? user.name[0] : 'U'
+  const user = getUser();
+  const userLetter = user ? user.name[0] : 'U';
 
   return (
-    <React.Fragment>
+    <>
       <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
-        <Tooltip title='Log out'>
+        <Tooltip title="Log out">
           <IconButton
             onClick={handleClick}
-            size='small'
+            size="small"
             sx={{ ml: 2 }}
             aria-controls={open ? 'account-menu' : undefined}
-            aria-haspopup='true'
-            aria-expanded={open ? 'true' : undefined}
-          >
-            {/* Avatar component receive the letter function*/}
+            aria-haspopup="true"
+            aria-expanded={open ? 'true' : undefined}>
+            {/* Avatar component receive the letter function */}
             <Avatar sx={{ width: 32, height: 32 }}>{userLetter}</Avatar>
           </IconButton>
         </Tooltip>
       </Box>
       <Menu
         anchorEl={anchorEl}
-        id='account-menu'
+        id="account-menu"
         open={open}
         onClose={handleClose}
         onClick={handleClose}
@@ -73,18 +72,17 @@ const LogoutBtn = ({ clickLogout }) => {
           },
         }}
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
-        anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
-      >
-        {/* event must be added to the wrapper, otherwise it won't work*/}
+        anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}>
+        {/* event must be added to the wrapper, otherwise it won't work */}
         <MenuItem onClick={clickLogout}>
           <ListItemIcon>
-            <Logout fontSize='small' />
+            <Logout fontSize="small" />
           </ListItemIcon>
           Logout
         </MenuItem>
       </Menu>
-    </React.Fragment>
-  )
-}
+    </>
+  );
+};
 
-export default LogoutBtn
+export default LogoutBtn;
