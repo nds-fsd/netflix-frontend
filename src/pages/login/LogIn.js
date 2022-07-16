@@ -13,7 +13,6 @@ const LogIn = () => {
   const [errMsg, setErrMsg] = useState('');
   //* This is to navigate to a page of our choice through router
   const navigate = useNavigate();
-
   useEffect(() => {
     //* Set the focus when the component loads
     emailRef.current.focus();
@@ -33,11 +32,11 @@ const LogIn = () => {
     api('POST', 'login', { body })
       .then((userSession) => {
         setUserSession(userSession);
-        navigate('/home');
+        if (userSession.user.role === 'ADMIN') navigate('/admin');
+        if (userSession.user.role === 'USER') navigate('/home');
       })
       .catch((error) => {
         setErrMsg(error.message);
-        console.error(error);
       });
   };
 
