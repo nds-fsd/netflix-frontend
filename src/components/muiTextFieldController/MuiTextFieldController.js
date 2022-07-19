@@ -1,10 +1,9 @@
 import React from 'react';
-import { useForm, Controller } from 'react-hook-form';
+import { Controller } from 'react-hook-form';
 import { TextField } from '@mui/material';
 
 const MuiTextFieldController = (props) => {
-  const { control } = useForm();
-  const { name, label, rules, value } = props;
+  const { name, label, rules, value, control } = props;
   return (
     <Controller
       name={name}

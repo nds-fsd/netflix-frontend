@@ -17,7 +17,7 @@ const Admin = ({ name, label, rules }) => {
           rules={{ required: true }}
           render={({ field }) => <TextField {...field} label="Input1" size="small" />}
         />
-        <MuiTextFieldController name="Input2" label="Input2" rules={{ required: true }} />
+        <MuiTextFieldController control={control} name="Input2" label="Input2" rules={{ required: true }} />
         <input type="submit" />
       </div>
     </form>
