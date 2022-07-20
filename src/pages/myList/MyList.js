@@ -1,23 +1,25 @@
 import React, { useEffect, useState } from 'react'
 import Card from '../../components/card/Card';
 import api from '../../utils/api';
+import { getFavFromBackend } from '../../utils/getFavs';
+import { getUserSession } from '../../utils/sesion';
 import styles from  "./myList.module.css";
 
 const MyList = () => {
 
-    const [favList, setFavlist] = useState([]);
-    // const { urlImgMovieCard, title, urlImgModal, movieDescription, movieRating, movieRuntime, id } = props;
+  const [favList, setFavlist] = useState([]);
+  // const { urlImgMovieCard, title, urlImgModal, movieDescription, movieRating, movieRuntime, id } = props;
 
-    useEffect(() => {
-        api('GET', 'movies').then((movies) => {
-            console.log(movies) 
-            setFavlist(movies)})
-        
-    }, []);
+  useEffect(() => {
+    const user = getUserSession();
+    getFavFromBackend(user)
+    .then(response => {
+      setFavlist(response);
+    })
+  }, []);
 
-    // const isNotFav = () => {
-    //     if (!favList)
-    // }
+
+
         
   return (
   <div className={styles.FavList}>
