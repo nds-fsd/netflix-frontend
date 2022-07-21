@@ -20,11 +20,11 @@ function Home() {
       HOME
       <div className="filmContainer">
         {movies &&
-          movies.map(({ _id, title, prj_urlImageMovie, urlImageModal, description, rating, runtime }) => (
+          movies.map(({ _id, title, urlImageMovie, urlImageModal, description, rating, runtime }) => (
             <Card
               refreshListMovies={() => refreshListMovies()}
               id={_id}
-              urlImageMovie={prj_urlImageMovie}
+              urlImageMovie={urlImageMovie}
               title={title}
               urlImgModal={urlImageModal}
               movieDescription={description}

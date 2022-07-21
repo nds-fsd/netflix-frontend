@@ -1,7 +1,5 @@
-import api from './api'
+import api from './api';
 
-const getFavFromBackend = (user) => {
-    return api('GET', `user/${user.user.id}/favs`);
-}
+const getFavFromBackend = (user) => api('GET', `user/${user.user.id}/favs`);
 
-export { getFavFromBackend }
+export { getFavFromBackend };
