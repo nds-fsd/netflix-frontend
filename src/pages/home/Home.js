@@ -24,7 +24,7 @@ function Home() {
             <Card
               refreshListMovies={() => refreshListMovies()}
               id={_id}
-              urlImgMovieCard={urlImageMovie}
+              urlImageMovie={urlImageMovie}
               title={title}
               urlImgModal={urlImageModal}
               movieDescription={description}
