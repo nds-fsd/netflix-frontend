@@ -2,7 +2,7 @@ import React from 'react';
 import './Modal.css';
 import FavButton from '../favButton/FavButton';
 
-const Modal = ({ imgModal, title, closeModal, description, movieRuntime, movieRating, setMylist, stateFav, id }) => {
+const Modal = ({ urlImgModal, title, closeModal, description, movieRuntime, movieRating, setMylist, stateFav, id }) => {
   const colorFilmRating = (rating) => {
     switch (rating) {
       case '12+':
@@ -23,7 +23,7 @@ const Modal = ({ imgModal, title, closeModal, description, movieRuntime, movieRa
   return (
     <div className="wrapperModalOverlay">
       <div className="wrapperModal">
-        <img src={imgModal} alt={' '} />
+        <img src={urlImgModal} alt={' '} />
 
         <div className="closeModal" onClick={closeModal}>
           ❌

@@ -29,4 +29,8 @@ const removeMovieFromFav = async (userSession, movie) => {
     });
 };
 
-export { movieToFav, removeMovieFromFav, getFavMovies };
+const appendMovieToBBDD = async (body) => {
+  api('POST', `movies`, { body });
+};
+
+export { movieToFav, removeMovieFromFav, getFavMovies, appendMovieToBBDD };

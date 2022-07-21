@@ -6,11 +6,19 @@ import MuiTextFieldController from '../../components/muiTextFieldController/MuiT
 import styles from './Admin.module.css';
 import MuiSelectController from '../../components/muiSelectController/MuiSelectController';
 import { language, otherLanguage, rating } from '../../utils/formMenuItems';
+import { appendMovieToBBDD } from '../../utils/movies';
 
 const Admin = ({ name, label, rules, helperText, multilinie }) => {
   const { control, handleSubmit, reset, register } = useForm();
   const onSubmit = (data) => {
     console.log(data);
+    appendMovieToBBDD(data)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
     reset();
   };
 
@@ -60,14 +68,14 @@ const Admin = ({ name, label, rules, helperText, multilinie }) => {
               </MenuItem>
             ))}
           </MuiSelectController>
-          <MuiSelectController control={control} name="language" id="languageSelect" label="Language">
+          <MuiSelectController control={control} name="originalLanguage" id="languageSelect" label="Language">
             {language.map((res) => (
               <MenuItem key={res.value} value={res.value}>
                 {res.text}
               </MenuItem>
             ))}
           </MuiSelectController>
-          <MuiSelectController control={control} name="otherLanguage" id="otherLanguageSelect" label="Other Language">
+          <MuiSelectController control={control} name="otherLanguagues" id="otherLanguageSelect" label="Other Language">
             {otherLanguage.map((res) => (
               <MenuItem key={res.value} value={res.value}>
                 {res.text}
