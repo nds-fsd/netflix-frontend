@@ -14,19 +14,21 @@ const MyList = () => {
     });
   }, []);
 
+  console.log(favList);
+
   return (
     <div className={styles.FavList}>
       <h2 className={styles.Title}>My favourite movies </h2>
       <div className={styles.ListContainer}>
-        {favList.map((movie) => (
+        {favList.map(({ _id, title, urlImgMovie, urlImgModal, description, rating, runtime }) => (
           <Card
-            id={movie.id}
-            urlImgMovieCard={movie.urlImgMovie}
-            tittle={movie.title}
-            urlImgModal={movie.urlImgModal}
-            movieDescription={movie.description}
-            movieRating={movie.rating}
-            movieRuntime={movie.runtime}
+            id={_id}
+            urlImgMovie={urlImgMovie}
+            tittle={title}
+            urlImgModal={urlImgModal}
+            movieDescription={description}
+            movieRating={rating}
+            movieRuntime={runtime}
           />
         ))}
       </div>

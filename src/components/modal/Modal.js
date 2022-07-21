@@ -24,13 +24,17 @@ const Modal = ({ urlImgModal, title, closeModal, description, movieRuntime, movi
     <div className="wrapperModalOverlay">
       <div className="wrapperModal">
         <img src={urlImgModal} alt={' '} />
-
         <div className="closeModal" onClick={closeModal}>
           ❌
         </div>
         <h2>{title}</h2>
         <p>{description}</p>
-        <p className="runtimeMovie">{movieRuntime}</p>
+        <div className="wrapperRating">
+          <p>Runtime</p>
+          <p className="runtimeMovie">{movieRuntime}</p>
+          <p>min</p>
+        </div>
+
         <div className="wrapperRating">
           <p>Rating: </p>
 
