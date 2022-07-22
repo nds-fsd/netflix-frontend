@@ -1,4 +1,12 @@
+.pageContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
 
+.spacing{
+    margin-right: 10px;
+}
 .createMovies{
     width: 60vh;
     min-height: 50vh;
@@ -7,6 +15,16 @@
     margin-left:  5vh;
     display: flex;
     flex-direction: row;
+    justify-content: center;
+    border-radius: 3px;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.5);
+}
+.movieContainer{
+    min-width: 50vw;
+    min-height: 50vh;
+    padding: 20px;
+    margin-top: 5vh;
+    margin-left:  20vh;
     justify-content: center;
     border-radius: 3px;
     box-shadow: 0px 0px 10px rgba(0,0,0,0.5);

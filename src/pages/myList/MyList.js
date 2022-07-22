@@ -14,8 +14,6 @@ const MyList = () => {
     });
   }, []);
 
-  console.log(favList);
-
   return (
     <div className={styles.FavList}>
       <h2 className={styles.Title}>My favourite movies </h2>
