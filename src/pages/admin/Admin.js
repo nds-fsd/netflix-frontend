@@ -8,11 +8,12 @@ import MuiTextFieldController from '../../components/muiTextFieldController/MuiT
 import styles from './Admin.module.css';
 import MuiSelectController from '../../components/muiSelectController/MuiSelectController';
 import { language, otherLanguage, rating } from '../../utils/formMenuItems';
-import { appendMovieToBBDD, getMovies } from '../../utils/movies';
+import { appendMovieToBBDD, deleteMovieFormBBDD } from '../../utils/movies';
 import api from '../../utils/api';
 
 const Admin = ({ name, label, rules, helperText, multilinie }) => {
   const [listMovies, setListMovies] = useState([]);
+  const [isEditing, setIsEditing] = useState(false);
   const [refresh, setRefresh] = useState(false);
   const { control, handleSubmit, reset, register } = useForm();
 
@@ -21,9 +22,10 @@ const Admin = ({ name, label, rules, helperText, multilinie }) => {
     reset();
     setRefresh(!refresh);
   };
-  // const refreshListMoviesAdmin = () => {
-  //   setRefresh(!refresh);
-  // };
+  const deleteMovie = (id) => {
+    deleteMovieFormBBDD(id);
+    setRefresh(!refresh);
+  };
   useEffect(() => {
     api('GET', 'movies').then((movies) => {
       setListMovies(movies);
@@ -35,7 +37,11 @@ const Admin = ({ name, label, rules, helperText, multilinie }) => {
       <div className={styles.createMovies}>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className={styles.center}>
-            <span className={styles.titleDashboard}>Create Movie Dashboard</span>
+            {isEditing ? (
+              <span className={styles.titleDashboard}>Create Movie Dashboard</span>
+            ) : (
+              <span className={styles.titleDashboard}>Edit Movie Dashboard</span>
+            )}
           </div>
           <MuiTextFieldController control={control} name="title" label="Title" />
           <MuiTextFieldController control={control} name="producer" label="Producer" />
@@ -113,16 +119,32 @@ const Admin = ({ name, label, rules, helperText, multilinie }) => {
       <div className={styles.movieContainer}>
         <List>
           {listMovies.map((movie) => (
-            <ListItem key={movie.id}>
+            <ListItem key={movie.id} className={styles.centerListItem}>
               <ListItemAvatar>
                 <Avatar src={movie.urlImgMovie} alt={movie.title} />
               </ListItemAvatar>
-              <ListItemText primary={movie.title} />
-              <Button variant="outlined" color="secondary" size="medium">
-                <PlumbingIcon className={styles.spacingIcon} />
-                Delete Movie
+              <div className={styles.box}>
+                <ListItemText primary={movie.title} />
+              </div>
+              <ListItemText primary={movie._id} />
+              <Button
+                onClick={() => {
+                  setIsEditing(!isEditing);
+                }}
+                variant="contained"
+                color="secondary"
+                size="medium"
+                className={styles.spacing}>
+                <PlumbingIcon className={styles.spacing} />
+                Edit Movie
               </Button>
-              <Button variant="contained" color="error" size="medium">
+              <Button
+                onClick={() => {
+                  deleteMovie(movie._id);
+                }}
+                variant="contained"
+                color="error"
+                size="medium">
                 <MovieIcon className={styles.spacing} />
                 Delete Movie
               </Button>

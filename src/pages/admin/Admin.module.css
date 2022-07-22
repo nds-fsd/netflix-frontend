@@ -7,6 +7,10 @@
 .spacing{
     margin-right: 10px;
 }
+.box{
+    min-width: 30%;
+}
+
 .createMovies{
     width: 60vh;
     min-height: 50vh;
@@ -21,7 +25,7 @@
 }
 .movieContainer{
     min-width: 50vw;
-    min-height: 50vh;
+    height: 80vh;
     padding: 20px;
     margin-top: 5vh;
     margin-left:  20vh;

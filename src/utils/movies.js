@@ -31,8 +31,10 @@ const removeMovieFromFav = async (userSession, movie) => {
 
 const appendMovieToBBDD = async (body) => api('POST', 'movies', { body });
 
+const deleteMovieFormBBDD = async (id) => api('DELETE', `movies/${id}`);
+
 const getMovies = async (user) => {
   api('GET', `movies`);
 };
 
-export { movieToFav, removeMovieFromFav, getFavMovies, appendMovieToBBDD, getMovies };
+export { movieToFav, removeMovieFromFav, getFavMovies, appendMovieToBBDD, getMovies, deleteMovieFormBBDD };
