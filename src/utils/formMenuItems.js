@@ -15,7 +15,14 @@ const language = [
 const otherLanguage = [
   { value: 'ES', text: 'ES Spanish' },
   { value: 'UK', text: 'UK English' },
-  { value: 'US', text: 'UK English' },
+  { value: 'US', text: 'US English' },
 ];
 
-export { rating, language, otherLanguage };
+const categories = [
+  { value: 'Action', text: 'Action' },
+  { value: 'Horror', text: 'Horror' },
+  { value: 'Comedy', text: 'Comedy' },
+  { value: 'Drama', text: 'Drama' },
+];
+
+export { rating, language, otherLanguage, categories };

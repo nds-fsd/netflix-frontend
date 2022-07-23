@@ -1,27 +1,34 @@
 import React, { useState, useEffect } from 'react';
-import { useForm } from 'react-hook-form';
+import { set, useForm } from 'react-hook-form';
 import Button from '@mui/material/Button';
 import MovieIcon from '@mui/icons-material/Movie';
 import PlumbingIcon from '@mui/icons-material/Plumbing';
-import { List, ListItem, ListItemText, MenuItem, ListItemAvatar, Avatar } from '@mui/material';
+import DoorFrontTwoToneIcon from '@mui/icons-material/DoorFrontTwoTone';
+import { List, ListItem, ListItemText, MenuItem, ListItemAvatar, Avatar, Stack, Paper } from '@mui/material';
 import MuiTextFieldController from '../../components/muiTextFieldController/MuiTextFieldController';
 import styles from './Admin.module.css';
 import MuiSelectController from '../../components/muiSelectController/MuiSelectController';
-import { language, otherLanguage, rating } from '../../utils/formMenuItems';
-import { appendMovieToBBDD, deleteMovieFormBBDD } from '../../utils/movies';
+import { categories, language, otherLanguage, rating } from '../../utils/formMenuItems';
+import { appendMovieToBBDD, deleteMovieFormBBDD, getMovieById } from '../../utils/movies';
 import api from '../../utils/api';
 
 const Admin = ({ name, label, rules, helperText, multilinie }) => {
   const [listMovies, setListMovies] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
+  const [editMovie, setEditMovie] = useState(null);
   const [refresh, setRefresh] = useState(false);
   const { control, handleSubmit, reset, register } = useForm();
 
   const onSubmit = (data) => {
-    appendMovieToBBDD(data);
+    if (isEditing) {
+      api('PATCH', `movies/${editMovie._id}`, data);
+    } else {
+      appendMovieToBBDD(data);
+    }
     reset();
     setRefresh(!refresh);
   };
+
   const deleteMovie = (id) => {
     deleteMovieFormBBDD(id);
     setRefresh(!refresh);
@@ -32,12 +39,36 @@ const Admin = ({ name, label, rules, helperText, multilinie }) => {
     });
   }, [refresh]);
 
+  const movieToEdit = (id) => {
+    getMovieById(id)
+      .then((movie) => setEditMovie(movie))
+      .catch((err) => err);
+    setIsEditing(true);
+    setRefresh(!refresh);
+  };
+
+  const closeEdit = () => {
+    setEditMovie(null);
+    setIsEditing(false);
+  };
+
+  useEffect(() => {
+    if (isEditing === false) {
+      reset();
+      console.log(editMovie);
+      setRefresh(!refresh);
+    } else {
+      reset(editMovie);
+      setRefresh(!refresh);
+    }
+  }, [editMovie]);
+
   return (
     <div className={styles.pageContainer}>
       <div className={styles.createMovies}>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className={styles.center}>
-            {isEditing ? (
+            {!isEditing ? (
               <span className={styles.titleDashboard}>Create Movie Dashboard</span>
             ) : (
               <span className={styles.titleDashboard}>Edit Movie Dashboard</span>
@@ -101,6 +132,13 @@ const Admin = ({ name, label, rules, helperText, multilinie }) => {
                 </MenuItem>
               ))}
             </MuiSelectController>
+            {/* <MuiSelectController control={control} name="categories" id="categories" label="Categories">
+              {categories.map((res) => (
+                <MenuItem key={res.value} value={res.value}>
+                  {res.text}
+                </MenuItem>
+              ))}
+            </MuiSelectController> */}
           </div>
           <MuiTextFieldController
             control={control}
@@ -110,47 +148,69 @@ const Admin = ({ name, label, rules, helperText, multilinie }) => {
             variant="filled"
           />
           <div className={styles.buttonCreate}>
-            <Button type="submit" variant="contained" color="warning" size="large">
-              Create Movie
-            </Button>
+            {!isEditing ? (
+              <Button type="submit" variant="contained" color="warning" size="large">
+                Create Movie
+              </Button>
+            ) : (
+              <Stack spacing={2} direction="row">
+                <Button
+                  className={styles.spacing}
+                  onClick={() => closeEdit()}
+                  variant="contained"
+                  color="info"
+                  size="large">
+                  <DoorFrontTwoToneIcon className={styles.spacing} />
+                  Close Edit
+                </Button>
+                <Button type="submit" variant="contained" color="secondary" size="large">
+                  Update Movie
+                </Button>
+              </Stack>
+            )}
           </div>
         </form>
       </div>
       <div className={styles.movieContainer}>
-        <List>
-          {listMovies.map((movie) => (
-            <ListItem key={movie.id} className={styles.centerListItem}>
-              <ListItemAvatar>
-                <Avatar src={movie.urlImgMovie} alt={movie.title} />
-              </ListItemAvatar>
-              <div className={styles.box}>
-                <ListItemText primary={movie.title} />
-              </div>
-              <ListItemText primary={movie._id} />
-              <Button
-                onClick={() => {
-                  setIsEditing(!isEditing);
-                }}
-                variant="contained"
-                color="secondary"
-                size="medium"
-                className={styles.spacing}>
-                <PlumbingIcon className={styles.spacing} />
-                Edit Movie
-              </Button>
-              <Button
-                onClick={() => {
-                  deleteMovie(movie._id);
-                }}
-                variant="contained"
-                color="error"
-                size="medium">
-                <MovieIcon className={styles.spacing} />
-                Delete Movie
-              </Button>
-            </ListItem>
-          ))}
-        </List>
+        <Paper style={{ maxHeight: 740, overflow: 'auto' }}>
+          <List>
+            {listMovies.map((movie) => (
+              <ListItem key={movie.id} className={styles.centerListItem}>
+                <ListItemAvatar>
+                  <Avatar src={movie.urlImgMovie} alt={movie.title} />
+                </ListItemAvatar>
+                <div className={styles.box}>
+                  <ListItemText primary={movie.title} />
+                </div>
+                <ListItemText primary={movie._id} />
+
+                <Stack spacing={2} direction="row">
+                  <Button
+                    onClick={() => {
+                      movieToEdit(movie._id);
+                    }}
+                    variant="contained"
+                    color="secondary"
+                    size="medium"
+                    className={styles.spacing}>
+                    <PlumbingIcon className={styles.spacing} />
+                    Edit Movie
+                  </Button>
+                  <Button
+                    onClick={() => {
+                      deleteMovie(movie._id);
+                    }}
+                    variant="contained"
+                    color="error"
+                    size="medium">
+                    <MovieIcon className={styles.spacing} />
+                    Delete Movie
+                  </Button>
+                </Stack>
+              </ListItem>
+            ))}
+          </List>
+        </Paper>
       </div>
     </div>
   );
