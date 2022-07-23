@@ -35,4 +35,14 @@ const deleteMovieFormBBDD = async (id) => api('DELETE', `movies/${id}`);
 
 const getMovieById = async (id) => api('GET', `movies/${id}`);
 
-export { movieToFav, removeMovieFromFav, getFavMovies, appendMovieToBBDD, deleteMovieFormBBDD, getMovieById };
+const patchMovieById = async (id, body) => api('PATCH', `movies/${id}`, { body });
+
+export {
+  movieToFav,
+  removeMovieFromFav,
+  getFavMovies,
+  appendMovieToBBDD,
+  deleteMovieFormBBDD,
+  getMovieById,
+  patchMovieById,
+};

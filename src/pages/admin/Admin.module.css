@@ -10,7 +10,10 @@
 .box{
     min-width: 30%;
 }
-
+.openForm{
+    width: 20%;
+    margin-bottom: 10px;
+}
 .createMovies{
     width: 60vh;
     min-height: 50vh;
