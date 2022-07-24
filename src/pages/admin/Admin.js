@@ -196,7 +196,10 @@ const Admin = ({ name, label, rules, helperText, multilinie }) => {
             </Button>
           </div>
         )}
-        <Paper style={{ maxHeight: 740, overflow: 'auto' }}>
+        <Paper
+          elevation={12}
+          style={{ maxHeight: 740, overflow: 'auto' }}
+          className={isFormVisible === true ? null : styles.centerPaper}>
           <List>
             {listMovies.map((movie) => (
               <ListItem key={movie.id} className={styles.centerListItem}>
