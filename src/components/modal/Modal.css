@@ -121,16 +121,16 @@
 }
 
 .playFilm{
-    max-width: 25vh;
-
+    max-width: 20vh;
     border: none;
     background-color: #fca211a9 ;
     color: #000000;
     font-size: 3vh;
     border: 2px solid #FCA311;
     border-radius: 25px;
+    margin-bottom: 20px;
     margin-left: 40%;
-    padding: 2% 3%;
+    padding: 2% 2%;
     cursor: pointer;
 }
 .playFilm:hover{

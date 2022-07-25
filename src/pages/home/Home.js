@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Slider from 'react-slick';
 import Card from '../../components/card/Card';
 import '../../components/card/Card.css';
 import api from '../../utils/api';
