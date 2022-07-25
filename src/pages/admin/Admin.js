@@ -141,13 +141,13 @@ const Admin = ({ name, label, rules, helperText, multilinie }) => {
                   </MenuItem>
                 ))}
               </MuiSelectController>
-              {/* <MuiSelectController control={control} name="categories" id="categories" label="Categories">
-              {categories.map((res) => (
-                <MenuItem key={res.value} value={res.value}>
-                  {res.text}
-                </MenuItem>
-              ))}
-            </MuiSelectController> */}
+              <MuiSelectController control={control} name="categories" id="categories" label="Categories">
+                {categories.map((res) => (
+                  <MenuItem key={res.value} value={res.value}>
+                    {res.text}
+                  </MenuItem>
+                ))}
+              </MuiSelectController>
             </div>
             <MuiTextFieldController
               control={control}
