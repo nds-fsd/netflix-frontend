@@ -5,7 +5,7 @@ import { getFavMoviesFromLocalStorage, getUserSession } from '../../utils/sesion
 import { getFavMovies, movieToFav, removeMovieFromFav } from '../../utils/movies';
 
 const Card = (props) => {
-  const { urlImgMovieCard, title, urlImgModal, movieDescription, movieRating, movieRuntime, id } = props;
+  const { urlImgMovie, title, urlImgModal, movieDescription, movieRating, movieRuntime, id } = props;
   const [modalOpen, setModalOpen] = useState(false);
   const [fav, setFav] = useState(false);
 
@@ -38,9 +38,9 @@ const Card = (props) => {
       {modalOpen && (
         <Modal
           id={id}
-          urlImg={urlImgMovieCard}
+          urlImgMovie={urlImgMovie}
           title={title}
-          imgModal={urlImgModal}
+          urlImgModal={urlImgModal}
           description={movieDescription}
           closeModal={handleModal}
           movieRuntime={movieRuntime}
@@ -51,7 +51,7 @@ const Card = (props) => {
       )}
       <div className="wrapperCard" onClick={handleModal}>
         <div className="wrapperImg">
-          <img src={urlImgMovieCard} alt={title} />
+          <img src={urlImgMovie} alt={title} />
         </div>
       </div>
     </>
