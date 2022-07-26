@@ -6,7 +6,6 @@ import styles from './myList.module.css';
 
 const MyList = () => {
   const [favList, setFavlist] = useState([]);
-  // const { urlImgMovieCard, title, urlImgModal, movieDescription, movieRating, movieRuntime, id } = props;
 
   useEffect(() => {
     const user = getUserSession();

@@ -1,0 +1,11 @@
+.Categorias {
+    background-color: white;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 25px 20px;    
+}
+
+.CategoryMovie {
+    display: flex;
+    flex-direction: row;
+}
