@@ -15,6 +15,13 @@ export const getToken = () => {
   return undefined;
 };
 
+export const isAdmin = () => {
+  if (hasUserSession()) {
+    return getUserSession().user.role === 'ADMIN';
+  }
+  return undefined;
+};
+
 export const getUser = () => {
   if (hasUserSession()) {
     return getUserSession().user;

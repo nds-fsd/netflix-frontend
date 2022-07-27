@@ -15,6 +15,7 @@ function Home() {
   useEffect(() => {
     api('GET', 'movies').then((moviesData) => setMovies(moviesData));
   }, [refresh]);
+  console.log(movies);
 
   console.log(movies);
   const categoriesPlus = [
@@ -31,13 +32,13 @@ function Home() {
       ))}
       {/* <div className="filmContainer">
         {movies &&
-          movies.map(({ _id, title, urlImageMovie, urlImageModal, description, rating, runtime }) => (
+          movies.map(({ _id, title, urlImgMovie, urlImgModal, description, rating, runtime }) => (
             <Card
               refreshListMovies={() => refreshListMovies()}
               id={_id}
-              urlImageMovie={urlImageMovie}
+              urlImgMovie={urlImgMovie}
               title={title}
-              urlImgModal={urlImageModal}
+              urlImgModal={urlImgModal}
               movieDescription={description}
               movieRating={rating}
               movieRuntime={runtime}

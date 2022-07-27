@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, Navigate, Outlet, useNavigate } from 'react-router-dom';
 import './Navbar.css';
-import { hasUserSession, removeUserSession } from '../../utils/sesion';
+import { hasUserSession, isAdmin, removeUserSession } from '../../utils/sesion';
 import LogoutBtn from '../logout/Logout';
 
 const Navbar = () => {
@@ -49,6 +49,11 @@ const Navbar = () => {
               <li>
                 <Link to="mylist"> My list </Link>
               </li>
+              {isAdmin() && (
+                <li>
+                  <Link to="admin">Dashboard</Link>
+                </li>
+              )}
             </ul>
             <div className="container_search">
               <input type="text" placeholder="Search your title 🔍" />

@@ -18,15 +18,15 @@ const MyList = () => {
     <div className={styles.FavList}>
       <h2 className={styles.Title}>My favourite movies </h2>
       <div className={styles.ListContainer}>
-        {favList.map((movie) => (
+        {favList.map(({ _id, title, urlImgMovie, urlImgModal, description, rating, runtime }) => (
           <Card
-            id={movie.id}
-            urlImgMovieCard={movie.prj_urlImgMovie}
-            tittle={movie.prj_title}
-            urlImgModal={movie.prj_urlImgModal}
-            movieDescription={movie.prj_description}
-            movieRating={movie.prj_rating}
-            movieRuntime={movie.prj_runtime}
+            id={_id}
+            urlImgMovie={urlImgMovie}
+            tittle={title}
+            urlImgModal={urlImgModal}
+            movieDescription={description}
+            movieRating={rating}
+            movieRuntime={runtime}
           />
         ))}
       </div>
