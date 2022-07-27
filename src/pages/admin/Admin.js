@@ -134,7 +134,8 @@ const Admin = ({ name, label, rules, helperText, multilinie }) => {
                 control={control}
                 name="otherLanguagues"
                 id="otherLanguageSelect"
-                label="Other Language">
+                label="Other Language"
+              >
                 {otherLanguage.map((res) => (
                   <MenuItem key={res.value} value={res.value}>
                     {res.text}
@@ -175,7 +176,8 @@ const Admin = ({ name, label, rules, helperText, multilinie }) => {
                     onClick={() => closeEdit()}
                     variant="contained"
                     color="info"
-                    size="large">
+                    size="large"
+                  >
                     <DoorFrontTwoToneIcon className={styles.spacing} />
                     Close Edit
                   </Button>
@@ -199,7 +201,8 @@ const Admin = ({ name, label, rules, helperText, multilinie }) => {
         <Paper
           elevation={12}
           style={{ maxHeight: 740, overflow: 'auto' }}
-          className={isFormVisible === true ? null : styles.centerPaper}>
+          className={isFormVisible === true ? null : styles.centerPaper}
+        >
           <List>
             {listMovies.map((movie) => (
               <ListItem key={movie.id} className={styles.centerListItem}>
@@ -220,7 +223,8 @@ const Admin = ({ name, label, rules, helperText, multilinie }) => {
                     variant="contained"
                     color="secondary"
                     size="medium"
-                    className={styles.spacing}>
+                    className={styles.spacing}
+                  >
                     <PlumbingIcon className={styles.spacing} />
                     Edit Movie
                   </Button>
@@ -230,7 +234,8 @@ const Admin = ({ name, label, rules, helperText, multilinie }) => {
                     }}
                     variant="contained"
                     color="error"
-                    size="medium">
+                    size="medium"
+                  >
                     <MovieIcon className={styles.spacing} />
                     Delete Movie
                   </Button>

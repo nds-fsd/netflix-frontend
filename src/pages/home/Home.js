@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-// import Card from '../../components/card/Card';
+import Card from '../../components/card/Card';
 import '../../components/card/Card.css';
 import Category from '../../components/category/category';
 import api from '../../utils/api';
@@ -15,9 +15,9 @@ function Home() {
   useEffect(() => {
     api('GET', 'movies').then((moviesData) => setMovies(moviesData));
   }, [refresh]);
-  console.log(movies);
 
   console.log(movies);
+
   const categoriesPlus = [
     { categoryName: 'ACTION', movies },
     { categoryName: 'HORROR', movies },
@@ -30,10 +30,11 @@ function Home() {
       {categoriesPlus.map((category) => (
         <Category category={category} />
       ))}
-      {/* <div className="filmContainer">
+      <div className="filmContainer">
         {movies &&
           movies.map(({ _id, title, urlImgMovie, urlImgModal, description, rating, runtime }) => (
             <Card
+              key={_id}
               refreshListMovies={() => refreshListMovies()}
               id={_id}
               urlImgMovie={urlImgMovie}
@@ -44,7 +45,7 @@ function Home() {
               movieRuntime={runtime}
             />
           ))}
-      </div> */}
+      </div>
     </div>
   );
 }
