@@ -2,6 +2,7 @@ import { getStorageItem, hasStorageItem, setStorageItem } from './storageHelpers
 
 export const getUserSession = () => getStorageItem('userSession');
 export const getFavsMovies = () => getStorageItem('favs');
+export const getCategories = () => getStorageItem('category');
 
 export const setUserSession = (sessionData) => setStorageItem('userSession', sessionData);
 
