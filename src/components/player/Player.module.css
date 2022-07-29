@@ -1,0 +1,19 @@
+.playerWrapper{
+    position: relative;
+    padding-bottom: 50%;
+}
+
+.reactPlayer{
+    position: absolute;
+    top: 0;
+    left: 0;
+    
+}
+
+.closeButton{
+    position: absolute;
+    top: 60px;
+    left: 83%;
+
+}
+

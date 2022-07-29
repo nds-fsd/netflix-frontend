@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { set, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import Button from '@mui/material/Button';
 import MovieIcon from '@mui/icons-material/Movie';
 import PlumbingIcon from '@mui/icons-material/Plumbing';
@@ -18,7 +18,7 @@ const Admin = ({ name, label, rules, helperText, multilinie }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editMovie, setEditMovie] = useState(null);
   const [refresh, setRefresh] = useState(false);
-  const { control, handleSubmit, reset, register, watch } = useForm({ defaultValues: {} });
+  const { control, handleSubmit, reset, register } = useForm({ defaultValues: {} });
   const [isFormVisible, setIsFormVisible] = useState(false);
 
   const onSubmit = (data) => {
@@ -141,7 +141,7 @@ const Admin = ({ name, label, rules, helperText, multilinie }) => {
                   </MenuItem>
                 ))}
               </MuiSelectController>
-              <MuiSelectController control={control} name="categories" id="categories" label="Categories">
+              <MuiSelectController control={control} name="categories" id="categoriesSelect" label="Categories">
                 {categories.map((res) => (
                   <MenuItem key={res.value} value={res.value}>
                     {res.text}
@@ -210,6 +210,7 @@ const Admin = ({ name, label, rules, helperText, multilinie }) => {
                   <ListItemText primary={movie.title} />
                 </div>
                 <ListItemText primary={movie._id} />
+                <ListItemText primary={movie.categories} />
 
                 <Stack spacing={2} direction="row">
                   <Button

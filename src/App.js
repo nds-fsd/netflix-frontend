@@ -9,6 +9,7 @@ import RegisterForm from './pages/register/RegisterForm';
 import LogIn from './pages/login/LogIn';
 import Admin from './pages/admin/Admin';
 import PrivateRoute from './utils/PrivateRoute';
+import Player from './components/player/Player';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Routes>
           <Route path="login" element={<LogIn />} />
           <Route path="register" element={<RegisterForm />} />
+          <Route path="player" element={<Player />} />
           <Route path="/" element={<Navbar />}>
             <Route path="home" element={<Home />} />
             <Route path="movies" element={<Movies />} />
