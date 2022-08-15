@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from './category.module.css';
 import Card from '../card/Card';
 
