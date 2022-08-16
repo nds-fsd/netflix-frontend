@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import './Modal.css';
 import FavButton from '../favButton/FavButton';
 
+// import Player from '../player/Player';
+
 const Modal = ({ urlImgModal, title, closeModal, description, movieRuntime, movieRating, setMylist, stateFav, id }) => {
   const navigate = useNavigate();
 

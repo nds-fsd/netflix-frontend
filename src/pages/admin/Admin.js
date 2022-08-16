@@ -1,17 +1,21 @@
 import React, { useState, useEffect } from 'react';
+import 'react-datepicker/dist/react-datepicker.css';
 import { useForm } from 'react-hook-form';
 import Button from '@mui/material/Button';
 import MovieIcon from '@mui/icons-material/Movie';
 import PlumbingIcon from '@mui/icons-material/Plumbing';
 import DoorFrontTwoToneIcon from '@mui/icons-material/DoorFrontTwoTone';
 import AutoFixHighIcon from '@mui/icons-material/AutoFixHigh';
+
 import { List, ListItem, ListItemText, MenuItem, ListItemAvatar, Avatar, Stack, Paper } from '@mui/material';
 import MuiTextFieldController from '../../components/muiTextFieldController/MuiTextFieldController';
+
 import styles from './Admin.module.css';
 import MuiSelectController from '../../components/muiSelectController/MuiSelectController';
 import { categories, language, otherLanguage, rating } from '../../utils/formMenuItems';
 import { appendMovieToBBDD, deleteMovieFormBBDD, getMovieById, patchMovieById } from '../../utils/movies';
 import api from '../../utils/api';
+import { dateFormater } from '../../utils/dateFormater';
 
 const Admin = ({ name, label, rules, helperText, multilinie }) => {
   const [listMovies, setListMovies] = useState([]);
@@ -36,6 +40,7 @@ const Admin = ({ name, label, rules, helperText, multilinie }) => {
     deleteMovieFormBBDD(id);
     setRefresh(!refresh);
   };
+
   useEffect(() => {
     api('GET', 'movies').then((movies) => {
       setListMovies(movies);
@@ -67,6 +72,9 @@ const Admin = ({ name, label, rules, helperText, multilinie }) => {
       reset();
       setRefresh(!refresh);
     } else {
+      editMovie.releaseDateStreaming = dateFormater(editMovie.releaseDateStreaming);
+      // we obtain YYYY-MM-DD data
+      editMovie.releaseDateTheaters = dateFormater(editMovie.releaseDateTheaters); // we obtain YYYY-MM-DD data
       reset(editMovie);
       setRefresh(!refresh);
     }
@@ -103,6 +111,7 @@ const Admin = ({ name, label, rules, helperText, multilinie }) => {
                   {...register('releaseDateTheaters', { required: true })}
                   type="date"
                   placeholder="Date"
+                  name="releaseDateTheaters"
                 />
               </div>
               <div className={styles.center}>
@@ -111,6 +120,7 @@ const Admin = ({ name, label, rules, helperText, multilinie }) => {
                   className={styles.datePicker}
                   {...register('releaseDateStreaming', { required: true })}
                   type="date"
+                  name="releaseDateStreaming"
                   placeholder="Date"
                 />
               </div>
