@@ -16,13 +16,11 @@ function Home() {
     api('GET', 'movies').then((moviesData) => setMovies(moviesData));
   }, [refresh]);
 
-  console.log(` estas son las dos categorias ${movies[0]}`);
-
   const categoriesPlus = [
-    { categoryName: 'ACTION', movies },
-    // { categoryName: 'HORROR', movies },
-    // { categoryName: 'COMEDY', movies },
-    // { categoryName: 'DRAMA', movies },
+    { categoryName: 'Action', movies },
+    { categoryName: 'Horror', movies },
+    { categoryName: 'Comedy', movies },
+    { categoryName: 'Drama', movies },
   ];
 
   return (

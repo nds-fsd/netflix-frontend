@@ -3,9 +3,13 @@
   font-size: 20px;
   font-weight: bold;
   padding: 25px 20px;
+  display: flex;
+  flex-direction: center;
+  justify-content: center;
 }
 
 .CategoryMovie {
   display: flex;
-  flex-direction: row;
+  flex-direction: center;
+  justify-content: center;
 }
