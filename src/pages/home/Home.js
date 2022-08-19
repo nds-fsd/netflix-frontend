@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Card from '../../components/card/Card';
 import '../../components/card/Card.css';
+import Category from '../../components/category/category';
 import api from '../../utils/api';
 
 function Home() {
@@ -14,15 +15,22 @@ function Home() {
   useEffect(() => {
     api('GET', 'movies').then((moviesData) => setMovies(moviesData));
   }, [refresh]);
-  console.log(movies);
+
+  const categoriesPlus = [
+    { categoryName: 'Action', movies },
+    { categoryName: 'Horror', movies },
+    { categoryName: 'Comedy', movies },
+    { categoryName: 'Drama', movies },
+  ];
 
   return (
-    <div>
-      HOME
+    <div className="homeFakeflix">
+      <div className="allMovies">ALL MOVIES</div>
       <div className="filmContainer">
         {movies &&
           movies.map(({ _id, title, urlImgMovie, urlImgModal, description, rating, runtime }) => (
             <Card
+              key={_id}
               refreshListMovies={() => refreshListMovies()}
               id={_id}
               urlImgMovie={urlImgMovie}
@@ -34,6 +42,9 @@ function Home() {
             />
           ))}
       </div>
+      {categoriesPlus.map((category) => (
+        <Category category={category} />
+      ))}
     </div>
   );
 }
