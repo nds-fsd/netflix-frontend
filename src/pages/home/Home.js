@@ -14,7 +14,6 @@ function Home() {
   useEffect(() => {
     api('GET', 'movies').then((moviesData) => setMovies(moviesData));
   }, [refresh]);
-  console.log(movies);
 
   return (
     <div>

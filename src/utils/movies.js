@@ -5,6 +5,7 @@ const getFavMovies = async (userSession) => {
     .then((res) => {
       const favs = res;
       window.localStorage.setItem('favs', JSON.stringify(favs));
+      return favs;
     })
     .catch((err) => console.log(err));
 };
