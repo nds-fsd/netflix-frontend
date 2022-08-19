@@ -24,10 +24,8 @@ function Home() {
   ];
 
   return (
-    <div className="category">
-      {categoriesPlus.map((category) => (
-        <Category category={category} />
-      ))}
+    <div className="homeFakeflix">
+      <div className="allMovies">ALL MOVIES</div>
       <div className="filmContainer">
         {movies &&
           movies.map(({ _id, title, urlImgMovie, urlImgModal, description, rating, runtime }) => (
@@ -44,6 +42,9 @@ function Home() {
             />
           ))}
       </div>
+      {categoriesPlus.map((category) => (
+        <Category category={category} />
+      ))}
     </div>
   );
 }
