@@ -63,7 +63,6 @@ const Admin = ({ name, label, rules, helperText, multilinie }) => {
 
   useEffect(() => {
     api('GET', 'user').then((users) => {
-      console.log(users);
       setListUsers(users);
     });
   }, [refresh]);
@@ -80,7 +79,6 @@ const Admin = ({ name, label, rules, helperText, multilinie }) => {
 
   const showListUsers = () => {
     setShowUsers(!showUsers);
-    console.log(!showUsers);
   };
 
   const movieToEdit = (id) => {
