@@ -3,6 +3,7 @@ import Card from '../../components/card/Card';
 import '../../components/card/Card.css';
 import Category from '../../components/category/category';
 import api from '../../utils/api';
+import CarouselShow from '../../components/carousel/CarouselShow';
 
 function Home() {
   const [movies, setMovies] = useState([]);
@@ -26,22 +27,7 @@ function Home() {
   return (
     <div className="homeFakeflix">
       <div className="allMovies">ALL MOVIES</div>
-      <div className="filmContainer">
-        {movies &&
-          movies.map(({ _id, title, urlImgMovie, urlImgModal, description, rating, runtime }) => (
-            <Card
-              key={_id}
-              refreshListMovies={() => refreshListMovies()}
-              id={_id}
-              urlImgMovie={urlImgMovie}
-              title={title}
-              urlImgModal={urlImgModal}
-              movieDescription={description}
-              movieRating={rating}
-              movieRuntime={runtime}
-            />
-          ))}
-      </div>
+      <CarouselShow movies={movies} />
       {categoriesPlus.map((category) => (
         <Category category={category} />
       ))}
