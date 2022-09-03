@@ -66,12 +66,6 @@ const Admin = ({ name, label, rules, helperText, multilinie }) => {
     });
   }, [sorted]);
 
-  // useEffect(() => {
-  //   api('GET', 'user').then((users) => {
-  //     setListUsers(users);
-  //   });
-  // }, [refresh]);
-
   const openForm = () => {
     if (showUsers) {
       reset({ defaultValues: {} });
@@ -114,8 +108,7 @@ const Admin = ({ name, label, rules, helperText, multilinie }) => {
       reset();
       setRefresh(!refresh);
     } else {
-      editMovie.releaseDateStreaming = dateFormater(editMovie.releaseDateStreaming);
-      // we obtain YYYY-MM-DD data
+      editMovie.releaseDateStreaming = dateFormater(editMovie.releaseDateStreaming); // we obtain YYYY-MM-DD data
       editMovie.releaseDateTheaters = dateFormater(editMovie.releaseDateTheaters); // we obtain YYYY-MM-DD data
       reset(editMovie);
       setRefresh(!refresh);
