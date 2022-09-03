@@ -2,7 +2,11 @@ import React from 'react';
 import './Modal.css';
 import FavButton from '../favButton/FavButton';
 
-const Modal = ({ urlImgModal, title, closeModal, description, movieRuntime, movieRating, setMylist, stateFav, id }) => {
+const Modal = ({
+  movieInfo: { urlImgModal, title, description, runtime: movieRuntime, rating: movieRating, stateFav, id },
+  closeModal,
+  setMylist,
+}) => {
   const colorFilmRating = (rating) => {
     switch (rating) {
       case '12+':
