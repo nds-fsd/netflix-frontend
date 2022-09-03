@@ -314,7 +314,7 @@ const Admin = ({ name, label, rules, helperText, multilinie }) => {
             </div>
             <div className={styles.optionButton}>
               <Button onClick={() => setSorted(!sorted)} variant="contained" size="large">
-                {showUsers ? <span>Sort alphabetically</span> : <span>Show last added</span>}
+                {sorted ? <span>Sort last added </span> : <span>Show alphabetically</span>}
               </Button>
             </div>
           </div>
