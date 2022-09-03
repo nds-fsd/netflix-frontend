@@ -17,6 +17,7 @@ import { appendMovieToBBDD, deleteMovieFormBBDD, getMovieById, patchMovieById } 
 import { appendUserToBBDD, deleteUserFromBBDD, getUserById, patchUserById } from '../../utils/users';
 import api from '../../utils/api';
 import { dateFormater } from '../../utils/dateFormater';
+import { SortArrayMovies, SortArrayUsers } from '../../utils/sortArray';
 
 const Admin = ({ name, label, rules, helperText, multilinie }) => {
   const [listMovies, setListMovies] = useState([]);
@@ -26,6 +27,7 @@ const Admin = ({ name, label, rules, helperText, multilinie }) => {
   const [editUser, setEditUser] = useState(null);
   const [editMovie, setEditMovie] = useState(null);
   const [refresh, setRefresh] = useState(false);
+  const [sorted, setSorted] = useState(false);
   const { control, handleSubmit, reset, register } = useForm({ defaultValues: {} });
   const [isFormVisible, setIsFormVisible] = useState(false);
 
@@ -57,15 +59,18 @@ const Admin = ({ name, label, rules, helperText, multilinie }) => {
 
   useEffect(() => {
     api('GET', 'movies').then((movies) => {
-      setListMovies(movies);
+      sorted ? setListMovies(movies.sort(SortArrayMovies)) : setListMovies(movies);
     });
-  }, [refresh]);
-
-  useEffect(() => {
     api('GET', 'user').then((users) => {
-      setListUsers(users);
+      sorted ? setListUsers(users.sort(SortArrayUsers)) : setListUsers(users);
     });
-  }, [refresh]);
+  }, [sorted]);
+
+  // useEffect(() => {
+  //   api('GET', 'user').then((users) => {
+  //     setListUsers(users);
+  //   });
+  // }, [refresh]);
 
   const openForm = () => {
     if (showUsers) {
@@ -312,6 +317,11 @@ const Admin = ({ name, label, rules, helperText, multilinie }) => {
             <div className={styles.optionButton}>
               <Button onClick={() => showListUsers()} variant="contained" size="large">
                 {showUsers ? <span>Show Movie List</span> : <span>Show User List</span>}
+              </Button>
+            </div>
+            <div className={styles.optionButton}>
+              <Button onClick={() => setSorted(!sorted)} variant="contained" size="large">
+                {showUsers ? <span>Sort alphabetically</span> : <span>Show last added</span>}
               </Button>
             </div>
           </div>
