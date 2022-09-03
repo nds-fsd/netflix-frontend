@@ -5,11 +5,11 @@ import Modal from '../modal/Modal';
 import { getFavMoviesFromLocalStorage, getUserSession } from '../../utils/sesion';
 import { getFavMovies, movieToFav, removeMovieFromFav } from '../../utils/movies';
 
-const CarouselShow = (props) => {
-  const { movies, urlImgMovie, title, urlImgModal, movieDescription, movieRating, movieRuntime, id } = props;
+const CarouselShow = ({ movies }) => {
   const [width, setWidth] = useState(0);
   //! This is for check!
   const [modalOpen, setModalOpen] = useState(false);
+  const [movieInfo, setMovieInfo] = useState({});
   const [fav, setFav] = useState(false);
 
   // useRef is kinda document.queryselector in JS
@@ -23,17 +23,18 @@ const CarouselShow = (props) => {
   }, [carousel]);
 
   //! This is for check!
-  const handleModal = async () => {
+  const handleModal = async (movie) => {
     setModalOpen(!modalOpen);
+    setMovieInfo(movie);
     getFavMovies(getUserSession());
     const favs = getFavMoviesFromLocalStorage();
-    if (favs.includes(id)) {
+    if (favs.includes(movieInfo.id)) {
       setFav(true);
     }
   };
   const handleFavButton = () => {
     const userSession = getUserSession();
-    const body = { id };
+    const body = { id: movieInfo.id };
     const movie = body.id;
     if (fav === false) {
       movieToFav(userSession, body);
@@ -48,20 +49,7 @@ const CarouselShow = (props) => {
 
   return movies?.length ? (
     <div>
-      {modalOpen && (
-        <Modal
-          id={id}
-          urlImgMovie={urlImgMovie}
-          title={title}
-          urlImgModal={urlImgModal}
-          description={movieDescription}
-          closeModal={handleModal}
-          movieRuntime={movieRuntime}
-          movieRating={movieRating}
-          setMylist={handleFavButton}
-          stateFav={fav}
-        />
-      )}
+      {modalOpen && <Modal movieInfo={movieInfo} closeModal={handleModal} setMylist={handleFavButton} />}
       <motion.div ref={carousel} className="carousel" whileTap={{ cursor: 'grabbing' }}>
         <motion.div
           // drag makes the motion of sliding, x means horizontal
@@ -69,7 +57,7 @@ const CarouselShow = (props) => {
           dragConstraints={{ right: 0, left: -width }}
           className="innerCarousel">
           {movies.map((movie) => (
-            <motion.div className="item" key={movie._id} onClick={handleModal}>
+            <motion.div className="item" key={movie._id} onClick={(value) => handleModal(movie)}>
               <img src={movie.urlImgMovie} alt={movie.title} />
             </motion.div>
           ))}
