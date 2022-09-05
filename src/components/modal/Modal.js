@@ -1,8 +1,21 @@
 import React from 'react';
 import './Modal.css';
 import FavButton from '../favButton/FavButton';
+import WatchLaterButton from '../watchLater/WatchLaterButton';
 
-const Modal = ({ urlImgModal, title, closeModal, description, movieRuntime, movieRating, setMylist, stateFav, id }) => {
+const Modal = ({
+  urlImgModal,
+  title,
+  closeModal,
+  description,
+  movieRuntime,
+  movieRating,
+  setMylist,
+  stateFav,
+  addToWatchLater,
+  includedInWatchLater,
+  id,
+}) => {
   const colorFilmRating = (rating) => {
     switch (rating) {
       case '12+':
@@ -40,6 +53,12 @@ const Modal = ({ urlImgModal, title, closeModal, description, movieRuntime, movi
 
           <p>{colorFilmRating(movieRating)}</p>
           <FavButton id={id} className="favStar" setFav={setMylist} favState={stateFav} />
+          <WatchLaterButton
+            id={id}
+            className="eyeButton"
+            setWatchLater={addToWatchLater}
+            watchLaterState={includedInWatchLater}
+          />
           <button className="playFilm" type="button">
             PLAY 🎥
           </button>

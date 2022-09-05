@@ -9,6 +9,7 @@ import RegisterForm from './pages/register/RegisterForm';
 import LogIn from './pages/login/LogIn';
 import Admin from './pages/admin/Admin';
 import PrivateRoute from './utils/PrivateRoute';
+import WatchLaterList from './pages/watchLater/WatchLater';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
             <Route path="movies" element={<Movies />} />
             <Route path="news" element={<News />} />
             <Route path="mylist" element={<MyList />} />
+            <Route path="watchlater" element={<WatchLaterList />} />
             <Route
               path="admin"
               element={
