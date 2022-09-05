@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { set, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import Button from '@mui/material/Button';
 import MovieIcon from '@mui/icons-material/Movie';
 import PlumbingIcon from '@mui/icons-material/Plumbing';
@@ -27,6 +27,7 @@ const Admin = ({ name, label, rules, helperText, multilinie }) => {
       setRefresh(!refresh);
     } else {
       appendMovieToBBDD(data);
+      console.log(data);
     }
     reset();
     setRefresh(!refresh);
@@ -141,7 +142,7 @@ const Admin = ({ name, label, rules, helperText, multilinie }) => {
                   </MenuItem>
                 ))}
               </MuiSelectController>
-              <MuiSelectController control={control} name="categories" id="categories" label="Categories">
+              <MuiSelectController control={control} name="categories" id="categoriesSelect" label="Categories">
                 {categories.map((res) => (
                   <MenuItem key={res.value} value={res.value}>
                     {res.text}
@@ -210,6 +211,7 @@ const Admin = ({ name, label, rules, helperText, multilinie }) => {
                   <ListItemText primary={movie.title} />
                 </div>
                 <ListItemText primary={movie._id} />
+                <ListItemText primary={movie.categories} />
 
                 <Stack spacing={2} direction="row">
                   <Button

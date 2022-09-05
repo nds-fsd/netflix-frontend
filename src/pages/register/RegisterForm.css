@@ -1,24 +1,21 @@
-
-
 * > * {
   margin: 0;
 }
 
 @import url('https://fonts.googleapis.com/css?family=Rubik:400,500&display=swap');
 
-
 body {
   font-family: 'Rubik', sans-serif;
 }
 
-.logo1{
+.logo1 {
   text-align: left;
   color: #000;
 }
 
 .logo2 {
   text-align: left;
-  color: #FCA311;
+  color: #fca311;
 }
 
 .cont-reg-form {
@@ -28,15 +25,20 @@ body {
   align-items: center;
   text-align: left;
 
-  background: #290c14;  /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, #c40eaf, #302b63, #0f0c29);  /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: #290c14; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #c40eaf, #302b63, #0f0c29); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #24243e,
+    #302b63,
+    #0f0c29
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
-.register-form{
+.register-form {
   max-width: 978px;
   width: 100vw;
-  display:flex;
+  display: flex;
   border: 1px solid #e9ecef;
   border-radius: 5px;
   box-shadow: 1px 3px 10px #e9ecef;
@@ -74,7 +76,7 @@ body {
   margin-top: 10px;
   font-weight: normal;
   font-size: 15px;
-  color: rgba(0,0,0,.4);
+  color: rgba(0, 0, 0, 0.4);
 }
 
 .form {
@@ -99,7 +101,7 @@ body {
   border-radius: 4px;
   font-family: 'Rubik', sans-serif;
   outline: 0;
-  transition: .2s;
+  transition: 0.2s;
   margin-top: 20px;
 }
 
@@ -110,7 +112,7 @@ body {
 .form > button {
   padding: 12px 10px;
   border: 0;
-  background: linear-gradient(to right, #FCA311 0%,#4f46a5 100%); 
+  background: linear-gradient(to right, #fca311 0%, #4f46a5 100%);
   border-radius: 3px;
   margin-top: 10px;
   color: #fff;
@@ -118,14 +120,12 @@ body {
   font-family: 'Rubik', sans-serif;
 }
 
-
-
-.register-form .left{
+.register-form .left {
   margin: auto;
   padding: 3em 0;
 }
 
-.register-form .right img{
+.register-form .right img {
   width: 480px;
   height: 100%;
   object-fit: cover;
@@ -135,8 +135,8 @@ body {
   display: none;
 }
 
-@media screen and (min-width: 860px)  {
-  .register-form .col-2 img{
+@media screen and (min-width: 860px) {
+  .register-form .col-2 img {
     display: initial;
   }
 }
