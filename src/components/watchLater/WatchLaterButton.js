@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { IconButton } from '@mui/material';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import './WatchLaterButton.css';
 
 const WatchLaterButton = (props) => {
@@ -8,15 +11,15 @@ const WatchLaterButton = (props) => {
     <>
       {watchLaterState ? (
         <div>
-          <button className="watchLaterButton" onClick={setWatchLater} type="button">
-            <title>Delete</title>
-          </button>
+          <IconButton onClick={setWatchLater}>
+            <AddCircleOutlineIcon color="primary" />
+          </IconButton>
         </div>
       ) : (
         <div>
-          <button className="watchLaterButton" onClick={setWatchLater} type="button">
-            <title>Add</title>
-          </button>
+          <IconButton onClick={setWatchLater}>
+            <AddCircleIcon color="primary" />
+          </IconButton>
         </div>
       )}
     </>

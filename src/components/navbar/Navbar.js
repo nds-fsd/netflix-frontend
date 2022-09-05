@@ -49,6 +49,9 @@ const Navbar = () => {
               <li>
                 <Link to="mylist"> My list </Link>
               </li>
+              <li>
+                <Link to="watchlater"> Watch Later </Link>
+              </li>
               {isAdmin() && (
                 <li>
                   <Link to="admin">Dashboard</Link>
