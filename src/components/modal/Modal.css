@@ -135,3 +135,48 @@
 .favStar {
   margin-top: 30px;
 }
+.blueRating{
+    background-color: blue;
+    color: #ffff;
+}
+
+.orangeRating{
+    background-color: orangered;
+    color: #ffff;
+}
+
+.greenRating{
+    background-color: green;
+    color: #ffff;
+}
+
+.redRating{
+    background-color: red;
+    color: #ffff;
+}
+
+.bold{
+    font-weight: bold;
+}
+
+.playFilm{
+    max-width: 20vh;
+    border: none;
+    background-color: #fca211a9 ;
+    color: #000000;
+    font-size: 3vh;
+    border: 2px solid #FCA311;
+    border-radius: 25px;
+    margin-bottom: 20px;
+    margin-left: 40%;
+    padding: 2% 2%;
+    cursor: pointer;
+}
+.playFilm:hover{
+    background-color: #FCA311;
+    color: white;
+    transition: all 0.5s;
+}
+.favStar{
+    margin-top: 30px;
+}
