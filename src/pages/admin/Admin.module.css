@@ -1,11 +1,11 @@
-.pageContainer{
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
+.pageContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
 }
 
-.spacing{
-    margin-right: 20px;
+.spacing {
+  margin-right: 20px;
 }
 .box{
     min-width: 20%;
@@ -28,9 +28,9 @@
     /* width: 32vh; */
     margin-bottom: 10px;
 }
-.centerPaper{
-    width: 100%;
-    margin-left: 25%;
+.centerPaper {
+  width: 100%;
+  margin-left: 25%;
 }
 .centerRole{
     width: 100%;
@@ -63,62 +63,61 @@
 .movieContainer{
     position: sticky;
     top: 110px;
-    min-width: 70vw;
+    min-width: 60vw;
     height: 80vh;
     padding: 20px;
     margin-top: 5vh;
     margin-left:  10vh;
     justify-content: center;
 }
-.center{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
-.titles{
-    font-size: 1,5vh;
-    margin-bottom: 10px;
-    color: rgb(126, 126, 126);
-    text-decoration: underline;
+.titles {
+  font-size: 1, 5vh;
+  margin-bottom: 10px;
+  color: rgb(126, 126, 126);
+  text-decoration: underline;
 }
-.datePicker{
-    border: none;
-    color: rgb(126, 126, 126);
+.datePicker {
+  border: none;
+  color: rgb(126, 126, 126);
 }
-.centerDatePickers{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-    margin-top: 10px;
+.centerDatePickers {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 10px;
 }
-.titleDashboard{
-    font-size: 2.5vh;
-    font-weight: bold;
-}
-
-.buttonCreate{
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 20px;
+.titleDashboard {
+  font-size: 2.5vh;
+  font-weight: bold;
 }
 
-.containserSelects{
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    margin-bottom: 10px;
-    margin-top: 10px;
-
+.buttonCreate {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
 }
 
-.selects{
-    margin-bottom: 10px;
-    width: 20%;
-    display: flex;
-    justify-content: flex-start;
+.containserSelects {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.selects {
+  margin-bottom: 10px;
+  width: 20%;
+  display: flex;
+  justify-content: flex-start;
 }

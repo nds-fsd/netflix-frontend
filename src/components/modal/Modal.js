@@ -2,12 +2,22 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Modal.css';
 import FavButton from '../favButton/FavButton';
+import WatchLaterButton from '../watchLater/WatchLaterButton';
 
-// import Player from '../player/Player';
-
-const Modal = ({ urlImgModal, title, closeModal, description, movieRuntime, movieRating, setMylist, stateFav, id }) => {
+const Modal = ({
+  urlImgModal,
+  title,
+  closeModal,
+  description,
+  movieRuntime,
+  movieRating,
+  setMylist,
+  stateFav,
+  addToWatchLater,
+  includedInWatchLater,
+  id,
+}) => {
   const navigate = useNavigate();
-
   const colorFilmRating = (rating) => {
     switch (rating) {
       case '12+':
@@ -47,15 +57,20 @@ const Modal = ({ urlImgModal, title, closeModal, description, movieRuntime, movi
           <div className="wrapperRating">
             <p>Rating: </p>
 
-            <p>{colorFilmRating(movieRating)}</p>
-            <FavButton id={id} className="favStar" setFav={setMylist} favState={stateFav} />
-            <button className="playFilm" type="button" onClick={handleClick}>
-              PLAY 🎥
-            </button>
-          </div>
+          <p>{colorFilmRating(movieRating)}</p>
+          <FavButton id={id} className="favStar" setFav={setMylist} favState={stateFav} />
+          <WatchLaterButton
+            id={id}
+            className="eyeButton"
+            setWatchLater={addToWatchLater}
+            watchLaterState={includedInWatchLater}
+          />
+          <button className="playFilm" type="button"  onClick={handleClick}>
+            PLAY 🎥
+          </button>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

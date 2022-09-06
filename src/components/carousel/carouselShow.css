@@ -1,0 +1,41 @@
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+
+.item {
+  min-height: 280px;
+  min-width: 300px;
+  padding: 20px;
+  
+  transition: transform 300ms ease 100ms;
+  -webkit-transition: transform 300ms ease 100ms;
+  -moz-transition: transform 300ms ease 100ms;
+  -ms-transition: transform 300ms ease 100ms;
+  -o-transition: transform 300ms ease 100ms;
+}
+
+img {
+  height: 100%;
+  width: 100%;
+  border-radius: 1rem;
+  /* remove pointer element to use it
+  pointer-events:none; */
+  /* pointer-events:none */
+}
+
+.innerCarousel {
+  display: flex;
+  /* background-color: aqua; */
+}
+
+
+.carousel {
+  overflow: hidden;
+  cursor: grab;
+  /* background-color: rgb(255, 0, 200); */
+}

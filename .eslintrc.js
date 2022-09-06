@@ -12,7 +12,13 @@ module.exports = {
   // extends: ['airbnb-typescript', 'react-app', 'prettier', 'prettier/react'], // if you're using typescript
   plugins: ['prettier'],
   rules: {
-    'prettier/prettier': ['error', prettierOptions],
+    'prettier/prettier': [
+      'error',
+      prettierOptions,
+      {
+        endOfLine: 'auto',
+      },
+    ],
     'react/react-in-jsx-scope': 'off',
     'react/jsx-filename-extension': 'off',
     'react/prop-types': 'off',
