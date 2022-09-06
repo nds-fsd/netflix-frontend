@@ -57,20 +57,21 @@ const Modal = ({
           <div className="wrapperRating">
             <p>Rating: </p>
 
-          <p>{colorFilmRating(movieRating)}</p>
-          <FavButton id={id} className="favStar" setFav={setMylist} favState={stateFav} />
-          <WatchLaterButton
-            id={id}
-            className="eyeButton"
-            setWatchLater={addToWatchLater}
-            watchLaterState={includedInWatchLater}
-          />
-          <button className="playFilm" type="button"  onClick={handleClick}>
-            PLAY 🎥
-          </button>
+            <p>{colorFilmRating(movieRating)}</p>
+            <FavButton id={id} className="favStar" setFav={setMylist} favState={stateFav} />
+            <WatchLaterButton
+              id={id}
+              className="eyeButton"
+              setWatchLater={addToWatchLater}
+              watchLaterState={includedInWatchLater}
+            />
+            <button className="playFilm" type="button" onClick={handleClick}>
+              PLAY 🎥
+            </button>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
