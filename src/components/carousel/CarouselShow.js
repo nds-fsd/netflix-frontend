@@ -4,6 +4,7 @@ import './carouselShow.css';
 import Modal from '../modal/Modal';
 import { getFavMoviesFromLocalStorage, getUserSession } from '../../utils/sesion';
 import { getFavMovies, movieToFav, removeMovieFromFav } from '../../utils/movies';
+import Card from '../card/Card';
 
 const CarouselShow = (props) => {
   const { movies, urlImgMovie, title, urlImgModal, movieDescription, movieRating, movieRuntime, id } = props;
@@ -20,7 +21,7 @@ const CarouselShow = (props) => {
       console.log(carousel);
     }
     // carousel -d is added to recalculate after every resize
-  }, [carousel]);
+  }, []);
 
   //! This is for check!
   const handleModal = async () => {
@@ -70,7 +71,7 @@ const CarouselShow = (props) => {
           className="innerCarousel">
           {movies.map((movie) => (
             <motion.div className="item" key={movie._id} onClick={handleModal}>
-              <img src={movie.urlImgMovie} alt={movie.title} />
+              <img src={movie.urlImgMovie} alt="" />
             </motion.div>
           ))}
         </motion.div>
