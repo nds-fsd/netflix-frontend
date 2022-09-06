@@ -21,7 +21,7 @@ const CarouselShow = (props) => {
       console.log(carousel);
     }
     // carousel -d is added to recalculate after every resize
-  }, []);
+  }, [carousel]);
 
   //! This is for check!
   const handleModal = async () => {
@@ -71,7 +71,16 @@ const CarouselShow = (props) => {
           className="innerCarousel">
           {movies.map((movie) => (
             <motion.div className="item" key={movie._id} onClick={handleModal}>
-              <img src={movie.urlImgMovie} alt="" />
+              <Card
+                key={movie._id}
+                id={movie._id}
+                urlImgMovie={movie.urlImgMovie}
+                title={movie.title}
+                urlImgModal={movie.urlImgModal}
+                movieDescription={movie.description}
+                movieRating={movie.rating}
+                movieRuntime={movie.runtime}
+              />
             </motion.div>
           ))}
         </motion.div>
