@@ -25,4 +25,8 @@ const categories = [
   { value: 'Drama', text: 'Drama' },
 ];
 
-export { rating, language, otherLanguage, categories };
+const role = [
+  { value: 'USER', text: 'USER' },
+  { value: 'ADMIN', text: 'ADMIN' },
+];
+export { rating, language, otherLanguage, categories, role };

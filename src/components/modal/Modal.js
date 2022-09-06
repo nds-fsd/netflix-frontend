@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Modal.css';
 import FavButton from '../favButton/FavButton';
 import WatchLaterButton from '../watchLater/WatchLaterButton';
@@ -16,6 +17,7 @@ const Modal = ({
   includedInWatchLater,
   id,
 }) => {
+  const navigate = useNavigate();
   const colorFilmRating = (rating) => {
     switch (rating) {
       case '12+':
@@ -32,24 +34,28 @@ const Modal = ({
         return <p>{movieRating}</p>;
     }
   };
+  const handleClick = () => {
+    navigate('/player');
+  };
 
   return (
-    <div className="wrapperModalOverlay">
-      <div className="wrapperModal">
-        <img src={urlImgModal} alt={' '} />
-        <div className="closeModal" onClick={closeModal}>
-          ❌
-        </div>
-        <h2>{title}</h2>
-        <p>{description}</p>
-        <div className="wrapperRating">
-          <p>Runtime</p>
-          <p className="runtimeMovie">{movieRuntime}</p>
-          <p>min</p>
-        </div>
+    <>
+      <div className="wrapperModalOverlay">
+        <div className="wrapperModal">
+          <img src={urlImgModal} alt={' '} />
+          <div className="closeModal" onClick={closeModal}>
+            ❌
+          </div>
+          <h2>{title}</h2>
+          <p>{description}</p>
+          <div className="wrapperRating">
+            <p>Runtime</p>
+            <p className="runtimeMovie">{movieRuntime}</p>
+            <p>min</p>
+          </div>
 
-        <div className="wrapperRating">
-          <p>Rating: </p>
+          <div className="wrapperRating">
+            <p>Rating: </p>
 
           <p>{colorFilmRating(movieRating)}</p>
           <FavButton id={id} className="favStar" setFav={setMylist} favState={stateFav} />
@@ -59,7 +65,7 @@ const Modal = ({
             setWatchLater={addToWatchLater}
             watchLaterState={includedInWatchLater}
           />
-          <button className="playFilm" type="button">
+          <button className="playFilm" type="button"  onClick={handleClick}>
             PLAY 🎥
           </button>
         </div>
