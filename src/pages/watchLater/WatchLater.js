@@ -5,19 +5,22 @@ import { getUserSession } from '../../utils/sesion';
 import './WatchLater.css';
 
 const WatchLaterList = () => {
-  const [watchLater, setWatchLater] = useState([]);
+  const [watchLaterShow, setWatchLaterShow] = useState([]);
 
   useEffect(() => {
     const user = getUserSession();
     getWatchfromBack(user).then((response) => {
-      setWatchLater(response);
+      setWatchLaterShow(response);
     });
   }, []);
+
+  console.log('1 watchLaterShow:', watchLaterShow);
 
   return (
     <div>
       <div>
-        {watchLater.map(({ _id, title, urlImgMovie, urlImgModal, description, rating, runtime }) => (
+        <h1>hi alejandra</h1>
+        {watchLaterShow.map(({ _id, title, urlImgMovie, urlImgModal, description, rating, runtime }) => (
           <Card
             id={_id}
             urlImgMovie={urlImgMovie}

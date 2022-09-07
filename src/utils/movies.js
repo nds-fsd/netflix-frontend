@@ -30,6 +30,35 @@ const removeMovieFromFav = async (userSession, movie) => {
     });
 };
 
+const getWatchLaterMovies = async (userSession) => {
+  api('get', `user/${userSession.user.id}/watchlater`)
+    .then((res) => {
+      const favs = res;
+      window.localStorage.setItem('favs', JSON.stringify(favs));
+      return favs;
+    })
+    .catch((err) => console.log(err));
+};
+
+const movieToWatchLater = async (userSession, body) => {
+  api('POST', `user/${userSession.user.id}/watchlater`, { body })
+    .then((res) => {
+      console.log(res.favs);
+    })
+    .catch((e) => {
+      console.error(e);
+    });
+};
+
+const removeMovieFromWatchLater = async (userSession, movie) => {
+  api('DELETE', `user/${userSession.user.id}/watchlater/${movie}`)
+    .then((res) => {
+      console.log(res.favs);
+    })
+    .catch((e) => {
+      console.error(e);
+    });
+};
 const appendMovieToBBDD = async (body) => api('POST', 'movies', { body });
 
 const deleteMovieFormBBDD = async (id) => api('DELETE', `movies/${id}`);
@@ -46,4 +75,7 @@ export {
   deleteMovieFormBBDD,
   getMovieById,
   patchMovieById,
+  getWatchLaterMovies,
+  movieToWatchLater,
+  removeMovieFromWatchLater,
 };

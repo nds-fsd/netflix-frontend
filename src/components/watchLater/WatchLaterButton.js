@@ -12,6 +12,7 @@ const WatchLaterButton = (props) => {
       {watchLaterState ? (
         <div>
           <IconButton onClick={setWatchLater}>
+            console.log('funciona')
             <AddCircleOutlineIcon color="primary" />
           </IconButton>
         </div>

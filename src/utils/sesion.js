@@ -2,6 +2,7 @@ import { getStorageItem, hasStorageItem, setStorageItem } from './storageHelpers
 
 export const getUserSession = () => getStorageItem('userSession');
 export const getFavsMovies = () => getStorageItem('favs');
+export const getWatchLaterMovies = () => getStorageItem('watchlater');
 export const getCategories = () => getStorageItem('category');
 
 export const setUserSession = (sessionData) => setStorageItem('userSession', sessionData);
@@ -32,6 +33,13 @@ export const getUser = () => {
 export const getFavMoviesFromLocalStorage = () => {
   if (hasUserSession()) {
     return getFavsMovies();
+  }
+  return undefined;
+};
+
+export const getWatchLaterMoviesFromLocalStorage = () => {
+  if (hasUserSession()) {
+    return getWatchLaterMovies();
   }
   return undefined;
 };

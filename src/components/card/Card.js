@@ -1,13 +1,21 @@
 import React, { useState } from 'react';
 import './Card.css';
 import Modal from '../modal/Modal';
-import { getFavMoviesFromLocalStorage, getUserSession } from '../../utils/sesion';
-import { getFavMovies, movieToFav, removeMovieFromFav } from '../../utils/movies';
+import { getFavMoviesFromLocalStorage, getWatchLaterMoviesFromLocalStorage, getUserSession } from '../../utils/sesion';
+import {
+  getFavMovies,
+  movieToFav,
+  removeMovieFromFav,
+  getWatchLaterMovies,
+  movieToWatchLater,
+  removeMovieFromWatchLater,
+} from '../../utils/movies';
 
 const Card = (props) => {
   const { urlImgMovie, title, urlImgModal, movieDescription, movieRating, movieRuntime, id } = props;
   const [modalOpen, setModalOpen] = useState(false);
   const [fav, setFav] = useState(false);
+  const [watchLater, setWatchLater] = useState(false);
 
   const handleModal = async () => {
     setModalOpen(!modalOpen);
@@ -15,6 +23,11 @@ const Card = (props) => {
     const favs = getFavMoviesFromLocalStorage();
     if (favs.includes(id)) {
       setFav(true);
+    }
+    getWatchLaterMovies(getUserSession());
+    const watchLater2 = getWatchLaterMoviesFromLocalStorage();
+    if (watchLater2.includes(id)) {
+      setWatchLater(true);
     }
   };
 
@@ -33,6 +46,21 @@ const Card = (props) => {
     }
   };
 
+  const handleWatchLaterButton = () => {
+    const userSession = getUserSession();
+    const body = { id };
+    const movie = body.id;
+    if (watchLater === false) {
+      movieToWatchLater(userSession, body);
+      window.localStorage.setItem('watchlater', JSON.stringify(movie));
+      setWatchLater(true);
+    } else {
+      removeMovieFromWatchLater(userSession, movie);
+      window.localStorage.removeItem('watchlater', JSON.stringify(movie));
+      setWatchLater(false);
+    }
+  };
+
   return (
     <>
       {modalOpen && (
@@ -47,6 +75,8 @@ const Card = (props) => {
           movieRating={movieRating}
           setMylist={handleFavButton}
           stateFav={fav}
+          setWatchLaterPage={handleWatchLaterButton}
+          stateWatchLater={watchLater}
         />
       )}
       <div className="wrapperCard" onClick={handleModal}>
