@@ -1,13 +1,19 @@
 import api from './api';
 
+// const getFavMovies = async (userSession) => {
+//   api('get', `user/${userSession.user.id}/favs `)
+//     // .then((res) => {
+//     //   const favs = res;
+//     //   window.localStorage.setItem('favs', JSON.stringify(favs));
+//     //   return favs;
+//     // })
+//     .then((res) => console.log(res))
+//     .catch((err) => console.log(err));
+// };
+
 const getFavMovies = async (userSession) => {
-  api('get', `user/${userSession.user.id}/favs `)
-    .then((res) => {
-      const favs = res;
-      window.localStorage.setItem('favs', JSON.stringify(favs));
-      return favs;
-    })
-    .catch((err) => console.log(err));
+  const response = await api('get', `user/${userSession.user.id}/favs `);
+  return response;
 };
 
 const movieToFav = async (userSession, body) => {
