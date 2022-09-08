@@ -1,32 +1,38 @@
+import React, { useState, useEffect } from 'react';
 import styles from './category.module.css';
 import Card from '../card/Card';
+import api from '../../utils/api';
 
-const Category = ({ category }) => {
-  console.log(category.categoryName);
+const Category = ({ id, titleCategory }) => {
+  const [movies, setMovies] = useState([]);
+
+  useEffect(() => {
+    api('GET', 'movies').then((moviesData) => setMovies(moviesData));
+  }, []);
 
   return (
-    <>
-      <div className={styles.Categorias}>{category.categoryName}</div>
+    <div>
+      <div className={styles.Categorias}>{`${titleCategory} 🔻`}</div>
       <div className={styles.CategoryMovie}>
-        {category.movies.map((movies) => {
-          if (category.categoryName === movies.categories[0]) {
+        {movies.map((movie) => {
+          if (movie?.category._id === id) {
             return (
               <Card
-                key={movies._id}
-                id={movies._id}
-                urlImgMovie={movies.urlImgMovie}
-                title={movies.title}
-                urlImgModal={movies.urlImgModal}
-                movieDescription={movies.description}
-                movieRating={movies.rating}
-                movieRuntime={movies.runtime}
+                key={movie._id}
+                id={movie._id}
+                urlImgMovie={movie.urlImgMovie}
+                title={movie.title}
+                urlImgModal={movie.urlImgModal}
+                movieDescription={movie.description}
+                movieRating={movie.rating}
+                movieRuntime={movie.runtime}
               />
             );
           }
-          return undefined;
+          return null;
         })}
       </div>
-    </>
+    </div>
   );
 };
 

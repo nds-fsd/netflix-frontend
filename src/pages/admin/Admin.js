@@ -12,7 +12,7 @@ import MuiTextFieldController from '../../components/muiTextFieldController/MuiT
 
 import styles from './Admin.module.css';
 import MuiSelectController from '../../components/muiSelectController/MuiSelectController';
-import { categories, language, otherLanguage, rating, role } from '../../utils/formMenuItems';
+import { language, otherLanguage, rating, role } from '../../utils/formMenuItems';
 import { appendMovieToBBDD, deleteMovieFormBBDD, getMovieById, patchMovieById } from '../../utils/movies';
 import { appendUserToBBDD, deleteUserFromBBDD, getUserById, patchUserById } from '../../utils/users';
 import api from '../../utils/api';
@@ -28,6 +28,7 @@ const Admin = ({ name, label, rules, helperText, multilinie }) => {
   const [editMovie, setEditMovie] = useState(null);
   const [refresh, setRefresh] = useState(false);
   const [sorted, setSorted] = useState(false);
+  const [categories, setCategories] = useState([]);
   const { control, handleSubmit, reset, register } = useForm({ defaultValues: {} });
   const [isFormVisible, setIsFormVisible] = useState(false);
 
@@ -65,7 +66,8 @@ const Admin = ({ name, label, rules, helperText, multilinie }) => {
     api('GET', 'user').then((users) => {
       sorted ? setListUsers(users.sort(SortArrayUsers)) : setListUsers(users);
     });
-  }, [sorted]);
+    api('GET', 'category').then((data) => setCategories(data));
+  }, [sorted, refresh]);
 
   const openForm = () => {
     if (showUsers) {
@@ -252,10 +254,10 @@ const Admin = ({ name, label, rules, helperText, multilinie }) => {
                     </MenuItem>
                   ))}
                 </MuiSelectController>
-                <MuiSelectController control={control} name="categories" id="categoriesSelect" label="Categories">
-                  {categories.map((res) => (
-                    <MenuItem key={res.value} value={res.value}>
-                      {res.text}
+                <MuiSelectController control={control} name="category" id="categoriesSelect" label="Category">
+                  {categories.map((cat) => (
+                    <MenuItem key={cat._id} value={cat._id}>
+                      {cat.title}
                     </MenuItem>
                   ))}
                 </MuiSelectController>
@@ -387,7 +389,7 @@ const Admin = ({ name, label, rules, helperText, multilinie }) => {
                     <ListItemText primary={movie.title} />
                   </div>
                   <ListItemText primary={movie._id} />
-                  <ListItemText primary={movie.categories} />
+                  <ListItemText primary={movie?.category?.title} />
 
                   <Stack spacing={2} direction="row">
                     <Button
