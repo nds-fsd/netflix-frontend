@@ -3,6 +3,7 @@ import { Link, Navigate, Outlet, useNavigate } from 'react-router-dom';
 import './Navbar.css';
 import { hasUserSession, isAdmin, removeUserSession } from '../../utils/sesion';
 import LogoutBtn from '../logout/Logout';
+import SearchShow from '../searchShow/SearchShow';
 
 const Navbar = () => {
   const [scrollHeight, setScrollHeight] = useState(0);
@@ -58,14 +59,12 @@ const Navbar = () => {
                 </li>
               )}
             </ul>
-            <div className="container_search">
-              <input type="text" placeholder="Search your title 🔍" />
-            </div>
-            <div className="container_button">
+            <SearchShow />
+            {/* <div className="container_button">
               <button className="button" type="button">
                 Search
               </button>
-            </div>
+            </div> */}
             <div className="logout">
               <LogoutBtn clickLogout={clickLogout} />
             </div>

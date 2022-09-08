@@ -44,6 +44,8 @@ const getMovieById = async (id) => api('GET', `movies/${id}`);
 
 const patchMovieById = async (id, body) => api('PATCH', `movies/${id}`, { body });
 
+const getMovieByParams = async (string) => api('GET', `movies?name=${string}`);
+
 export {
   movieToFav,
   removeMovieFromFav,
@@ -52,4 +54,5 @@ export {
   deleteMovieFormBBDD,
   getMovieById,
   patchMovieById,
+  getMovieByParams,
 };
