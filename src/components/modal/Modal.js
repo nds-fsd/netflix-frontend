@@ -1,22 +1,31 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Modal.css';
 import FavButton from '../favButton/FavButton';
 import WatchLaterButton from '../watchLater/WatchLaterButton';
+import {getFavMovies, movieToFav, removeMovieFromFav} from '../../utils/movies';
+import { getUserSession } from '../../utils/sesion';
 
-const Modal = ({
-  urlImgModal,
-  title,
-  closeModal,
-  description,
-  movieRuntime,
-  movieRating,
-  setMylist,
-  stateFav,
-  addToWatchLater,
-  includedInWatchLater,
-  id,
-}) => {
+const Modal = ({ movie, closeModal }) => {
+  const [favMovies, setFavMovies] = useState([])
+  const [fav, setFav] = React.useState(false);
+  const userSession = getUserSession();
+  React.useEffect(() => {
+    getFavMovies(userSession).then((response) => {
+      setFavMovies(response.map(responseMovie=>responseMovie._id))
+    });
+  }, []);
+
+  const {
+    urlImgModal,
+    title,
+    description,
+    movieRuntime,
+    movieRating,
+    addToWatchLater,
+    includedInWatchLater,
+    id,
+  } = movie || {};
   const navigate = useNavigate();
   const colorFilmRating = (rating) => {
     switch (rating) {
@@ -34,10 +43,23 @@ const Modal = ({
         return <p>{movieRating}</p>;
     }
   };
+
+  const handleFavButton = () => {
+    if (fav === false) {
+      movieToFav(userSession, {id:movie._id});
+      setFav(true);
+    } else {
+      removeMovieFromFav(userSession, movie._id);
+      setFav(false);
+    }
+  };
+
   const handleClick = () => {
     navigate('/player');
   };
-
+  useEffect(()=>{
+    if(favMovies) setFav(favMovies.includes(movie?._id))
+  }, [favMovies])
   return (
     <>
       <div className="wrapperModalOverlay">
@@ -58,7 +80,7 @@ const Modal = ({
             <p>Rating: </p>
 
             <p>{colorFilmRating(movieRating)}</p>
-            <FavButton id={id} className="favStar" setFav={setMylist} favState={stateFav} />
+            <FavButton id={id} className="favStar" setFav={handleFavButton} favState={fav} />
             <WatchLaterButton
               id={id}
               className="eyeButton"
