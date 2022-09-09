@@ -3,7 +3,7 @@ import './Card.css';
 import Modal from '../modal/Modal';
 
 const Card = ({ movie }) => {
-  const { urlImgMovie, title, urlImgModal, movieDescription, movieRating, movieRuntime, id } = movie || {};
+  const { urlImgMovie, title, id } = movie || {};
   const [modalOpen, setModalOpen] = useState(false);
 
   const handleModal = async () => {

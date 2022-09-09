@@ -43,7 +43,6 @@ const Admin = ({ name, label, rules, helperText, multilinie }) => {
       appendUserToBBDD(data);
     } else {
       appendMovieToBBDD(data);
-      console.log(data);
     }
     reset({ defaultValues: {} });
     setRefresh(!refresh);

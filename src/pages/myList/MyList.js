@@ -1,32 +1,26 @@
-import React, { useEffect, useState } from 'react';
+import React, {useState} from 'react';
 import Card from '../../components/card/Card';
-import { getFavFromBackend } from '../../utils/getFavs';
-import { getUserSession } from '../../utils/sesion';
 import styles from './myList.module.css';
+import {getFavMovies} from "../../utils/movies";
+import {getUserSession} from "../../utils/sesion";
 
 const MyList = () => {
-  const [favList, setFavlist] = useState([]);
+    const userSession = getUserSession();
+    const [favMovies, setFavMovies] = useState()
 
-  useEffect(() => {
-    const user = getUserSession();
-    getFavFromBackend(user).then((response) => {
-      setFavlist(response);
-    });
-  }, []);
+    React.useEffect(() => {
+        getFavMovies(userSession).then((response) => {
+            setFavMovies(response)
+        });
+    }, []);
 
   return (
     <div className={styles.FavList}>
       <h2 className={styles.Title}>My favourite movies </h2>
       <div className={styles.ListContainer}>
-        {favList.map(({ _id, title, urlImgMovie, urlImgModal, description, rating, runtime }) => (
+        {favMovies?.map((movie) => (
           <Card
-            id={_id}
-            urlImgMovie={urlImgMovie}
-            tittle={title}
-            urlImgModal={urlImgModal}
-            movieDescription={description}
-            movieRating={rating}
-            movieRuntime={runtime}
+            movie={movie}
           />
         ))}
       </div>

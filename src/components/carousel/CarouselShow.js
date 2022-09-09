@@ -18,11 +18,9 @@ const CarouselShow = (props) => {
   useEffect(() => {
     if (carousel.current) {
       setWidth(Number(carousel.current?.scrollWidth) - Number(carousel.current?.offsetWidth));
-      console.log(carousel);
     }
     // carousel -d is added to recalculate after every resize
-  }, [carousel]);
-
+  }, []);
   //! This is for check!
   const handleModal = async () => {
     setModalOpen(!modalOpen);
@@ -61,18 +59,17 @@ const CarouselShow = (props) => {
           stateFav={fav}
         />
       )}
-      <motion.div ref={carousel} className="carousel" whileTap={{ cursor: 'grabbing' }}>
         <motion.div
+            ref={carousel} className="innerCarousel" whileTap={{ cursor: 'grabbing' }}
           // drag makes the motion of sliding, x means horizontal
           drag="x"
           dragConstraints={{ right: 0, left: -width }}
-          className="innerCarousel">
+          >
           {movies.map((movie) => (
             <motion.div className="item" key={movie._id} onClick={handleModal}>
-              <Card movie={movie} />
+              <Card movie={{...movie, isFav: false}} />
             </motion.div>
           ))}
-        </motion.div>
       </motion.div>
     </div>
   ) : (

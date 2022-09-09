@@ -1,14 +1,20 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Modal.css';
 import FavButton from '../favButton/FavButton';
 import WatchLaterButton from '../watchLater/WatchLaterButton';
-import { movieToFav, getFavMovies, removeMovieFromFav } from '../../utils/movies';
+import {getFavMovies, movieToFav, removeMovieFromFav} from '../../utils/movies';
 import { getUserSession } from '../../utils/sesion';
 
 const Modal = ({ movie, closeModal }) => {
+  const [favMovies, setFavMovies] = useState([])
   const [fav, setFav] = React.useState(false);
   const userSession = getUserSession();
+  React.useEffect(() => {
+    getFavMovies(userSession).then((response) => {
+      setFavMovies(response.map(responseMovie=>responseMovie._id))
+    });
+  }, []);
 
   const {
     urlImgModal,
@@ -16,7 +22,6 @@ const Modal = ({ movie, closeModal }) => {
     description,
     movieRuntime,
     movieRating,
-    stateFav,
     addToWatchLater,
     includedInWatchLater,
     id,
@@ -40,15 +45,11 @@ const Modal = ({ movie, closeModal }) => {
   };
 
   const handleFavButton = () => {
-    const body = { id };
-    const movieId = body.id;
     if (fav === false) {
-      movieToFav(userSession, body);
-      window.localStorage.setItem('favs', JSON.stringify(movie));
+      movieToFav(userSession, {id:movie._id});
       setFav(true);
     } else {
-      removeMovieFromFav(userSession, movieId);
-      window.localStorage.removeItem('favs', JSON.stringify(movieId));
+      removeMovieFromFav(userSession, movie._id);
       setFav(false);
     }
   };
@@ -56,13 +57,9 @@ const Modal = ({ movie, closeModal }) => {
   const handleClick = () => {
     navigate('/player');
   };
-
-  React.useEffect(() => {
-    getFavMovies(userSession).then((response) => {
-      if (response.map((responseMovie) => responseMovie.id).includes(movie.id)) setFav(true);
-    });
-  }, []);
-
+  useEffect(()=>{
+    if(favMovies) setFav(favMovies.includes(movie?._id))
+  }, [favMovies])
   return (
     <>
       <div className="wrapperModalOverlay">

@@ -17,7 +17,6 @@ const SearchShow = () => {
   const [selectedMovie, setSelectedMovie] = useState(undefined);
 
   const debounced = useDebouncedCallback((value) => setSearch(value), 1500);
-  console.log(search);
 
   useEffect(() => {
     getMovieByParams(search).then((data) => setMovies(data));
@@ -28,9 +27,6 @@ const SearchShow = () => {
     setModalShow(true);
   };
 
-  console.log('selectedMovies', selectedMovie);
-  console.log(modalShow);
-  console.log(movies);
   return (
     <>
       {modalShow && (
@@ -50,7 +46,7 @@ const SearchShow = () => {
           handleOnChange(v.target.outerText);
         }}
         sx={{ width: 300 }}
-        renderInput={(params) => <TextField {...params} label="Search" onChange={() => console.log('holi')} />}
+        renderInput={(params) => <TextField {...params} label="Search" />}
       />
     </>
   );

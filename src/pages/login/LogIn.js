@@ -32,7 +32,6 @@ const LogIn = () => {
     api('POST', 'login', { body })
       .then((userSession) => {
         setUserSession(userSession);
-        console.log(userSession);
         if (userSession.user.role === 'ADMIN') navigate('/admin');
         if (userSession.user.role === 'USER') navigate('/home');
       })

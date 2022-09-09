@@ -1,4 +1,3 @@
-// import './App.css'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Navbar from './components/navbar/Navbar';
 import Home from './pages/home/Home';
@@ -11,8 +10,10 @@ import Admin from './pages/admin/Admin';
 import PrivateRoute from './utils/PrivateRoute';
 import Player from './components/player/Player';
 import WatchLaterList from './pages/watchLater/WatchLater';
+import React from "react";
 
 function App() {
+
   return (
     <div>
       <BrowserRouter>

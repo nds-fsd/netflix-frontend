@@ -10,22 +10,16 @@ const WatchLaterList = () => {
   useEffect(() => {
     const user = getUserSession();
     getWatchfromBack(user).then((response) => {
-      setWatchLater(response);
+      setWatchLater(response.map(item => item.movie));
     });
   }, []);
 
   return (
     <div>
       <div>
-        {watchLater.map(({ _id, title, urlImgMovie, urlImgModal, description, rating, runtime }) => (
+        {watchLater.map((movie) => (
           <Card
-            id={_id}
-            urlImgMovie={urlImgMovie}
-            tittle={title}
-            urlImgModal={urlImgModal}
-            movieDescription={description}
-            movieRating={rating}
-            movieRuntime={runtime}
+           movie={movie}
           />
         ))}
       </div>
