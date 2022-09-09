@@ -13,6 +13,8 @@ import Modal from '../modal/Modal';
 const SearchShow = () => {
   const [search, setSearch] = useState('');
   const [movies, setMovies] = useState([]);
+  const [modalShow, setModalShow] = useState(false);
+  const [selectedMovie, setSelectedMovie] = useState(undefined);
 
   const debounced = useDebouncedCallback((value) => setSearch(value), 1500);
   console.log(search);
@@ -21,16 +23,36 @@ const SearchShow = () => {
     getMovieByParams(search).then((data) => setMovies(data));
   }, [search]);
 
+  const handleOnChange = (value) => {
+    setSelectedMovie(movies.find((movie) => movie.title === value));
+    setModalShow(true);
+  };
+
+  console.log('selectedMovies', selectedMovie);
+  console.log(modalShow);
   console.log(movies);
   return (
-    <Autocomplete
-      disablePortal
-      freeSolo={false}
-      id="combo-box-demo"
-      options={movies.map((movie) => movie.title)}
-      sx={{ width: 300 }}
-      renderInput={(params) => <TextField {...params} label="Search" onClick={(e) => console.log(e)} />}
-    />
+    <>
+      {modalShow && (
+        <Modal
+          closeModal={() => {
+            setModalShow(false);
+          }}
+          movie={selectedMovie}
+        />
+      )}
+      <Autocomplete
+        disablePortal
+        freeSolo={false}
+        id="combo-box-demo"
+        options={movies.map((movie) => movie.title)}
+        onChange={(v) => {
+          handleOnChange(v.target.outerText);
+        }}
+        sx={{ width: 300 }}
+        renderInput={(params) => <TextField {...params} label="Search" onChange={() => console.log('holi')} />}
+      />
+    </>
   );
 };
 

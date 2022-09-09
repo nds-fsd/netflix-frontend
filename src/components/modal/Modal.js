@@ -3,20 +3,24 @@ import { useNavigate } from 'react-router-dom';
 import './Modal.css';
 import FavButton from '../favButton/FavButton';
 import WatchLaterButton from '../watchLater/WatchLaterButton';
+import { movieToFav, getFavMovies, removeMovieFromFav } from '../../utils/movies';
+import { getUserSession } from '../../utils/sesion';
 
-const Modal = ({
-  urlImgModal,
-  title,
-  closeModal,
-  description,
-  movieRuntime,
-  movieRating,
-  setMylist,
-  stateFav,
-  addToWatchLater,
-  includedInWatchLater,
-  id,
-}) => {
+const Modal = ({ movie, closeModal }) => {
+  const [fav, setFav] = React.useState(false);
+  const userSession = getUserSession();
+
+  const {
+    urlImgModal,
+    title,
+    description,
+    movieRuntime,
+    movieRating,
+    stateFav,
+    addToWatchLater,
+    includedInWatchLater,
+    id,
+  } = movie || {};
   const navigate = useNavigate();
   const colorFilmRating = (rating) => {
     switch (rating) {
@@ -34,9 +38,30 @@ const Modal = ({
         return <p>{movieRating}</p>;
     }
   };
+
+  const handleFavButton = () => {
+    const body = { id };
+    const movieId = body.id;
+    if (fav === false) {
+      movieToFav(userSession, body);
+      window.localStorage.setItem('favs', JSON.stringify(movie));
+      setFav(true);
+    } else {
+      removeMovieFromFav(userSession, movieId);
+      window.localStorage.removeItem('favs', JSON.stringify(movieId));
+      setFav(false);
+    }
+  };
+
   const handleClick = () => {
     navigate('/player');
   };
+
+  React.useEffect(() => {
+    getFavMovies(userSession).then((response) => {
+      if (response.map((responseMovie) => responseMovie.id).includes(movie.id)) setFav(true);
+    });
+  }, []);
 
   return (
     <>
@@ -58,7 +83,7 @@ const Modal = ({
             <p>Rating: </p>
 
             <p>{colorFilmRating(movieRating)}</p>
-            <FavButton id={id} className="favStar" setFav={setMylist} favState={stateFav} />
+            <FavButton id={id} className="favStar" setFav={handleFavButton} favState={fav} />
             <WatchLaterButton
               id={id}
               className="eyeButton"

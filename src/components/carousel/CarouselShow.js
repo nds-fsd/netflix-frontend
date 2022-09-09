@@ -57,8 +57,6 @@ const CarouselShow = (props) => {
           urlImgModal={urlImgModal}
           description={movieDescription}
           closeModal={handleModal}
-          movieRuntime={movieRuntime}
-          movieRating={movieRating}
           setMylist={handleFavButton}
           stateFav={fav}
         />
@@ -71,16 +69,7 @@ const CarouselShow = (props) => {
           className="innerCarousel">
           {movies.map((movie) => (
             <motion.div className="item" key={movie._id} onClick={handleModal}>
-              <Card
-                key={movie._id}
-                id={movie._id}
-                urlImgMovie={movie.urlImgMovie}
-                title={movie.title}
-                urlImgModal={movie.urlImgModal}
-                movieDescription={movie.description}
-                movieRating={movie.rating}
-                movieRuntime={movie.runtime}
-              />
+              <Card movie={movie} />
             </motion.div>
           ))}
         </motion.div>

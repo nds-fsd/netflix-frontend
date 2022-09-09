@@ -12,7 +12,7 @@ const MyList = () => {
     getFavFromBackend(user).then((response) => {
       setFavlist(response);
     });
-  }, [favList]);
+  }, []);
 
   return (
     <div className={styles.FavList}>
