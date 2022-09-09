@@ -59,17 +59,18 @@ const CarouselShow = (props) => {
           stateFav={fav}
         />
       )}
-        <motion.div
-            ref={carousel} className="innerCarousel" whileTap={{ cursor: 'grabbing' }}
-          // drag makes the motion of sliding, x means horizontal
-          drag="x"
-          dragConstraints={{ right: 0, left: -width }}
-          >
-          {movies.map((movie) => (
-            <motion.div className="item" key={movie._id} onClick={handleModal}>
-              <Card movie={{...movie, isFav: false}} />
-            </motion.div>
-          ))}
+      <motion.div
+        ref={carousel}
+        className="innerCarousel"
+        whileTap={{ cursor: 'grabbing' }}
+        // drag makes the motion of sliding, x means horizontal
+        drag="x"
+        dragConstraints={{ right: 0, left: -width }}>
+        {movies.map((movie) => (
+          <motion.div className="item" key={movie._id} onClick={handleModal}>
+            <Card movie={{ ...movie, isFav: false }} />
+          </motion.div>
+        ))}
       </motion.div>
     </div>
   ) : (

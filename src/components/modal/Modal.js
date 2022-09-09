@@ -1,31 +1,34 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useInsertionEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Modal.css';
 import FavButton from '../favButton/FavButton';
 import WatchLaterButton from '../watchLater/WatchLaterButton';
-import {getFavMovies, movieToFav, removeMovieFromFav} from '../../utils/movies';
+import {
+  getFavMovies,
+  getWatchLaterMovies,
+  movieToFav,
+  movieToWatchLater,
+  removeMovieFromFav,
+  removeMovieFromWatchLater,
+} from '../../utils/movies';
 import { getUserSession } from '../../utils/sesion';
 
 const Modal = ({ movie, closeModal }) => {
-  const [favMovies, setFavMovies] = useState([])
-  const [fav, setFav] = React.useState(false);
+  const [favMovies, setFavMovies] = useState([]);
+  const [watchMovies, setWatchMovies] = useState([]);
+  const [fav, setFav] = useState(false);
+  const [watch, setWatch] = useState(false);
   const userSession = getUserSession();
   React.useEffect(() => {
     getFavMovies(userSession).then((response) => {
-      setFavMovies(response.map(responseMovie=>responseMovie._id))
+      setFavMovies(response.map((responseMovie) => responseMovie._id));
+    });
+    getWatchLaterMovies(userSession).then((response) => {
+      setWatchMovies(response.map((responseMovie) => responseMovie._id));
     });
   }, []);
 
-  const {
-    urlImgModal,
-    title,
-    description,
-    movieRuntime,
-    movieRating,
-    addToWatchLater,
-    includedInWatchLater,
-    id,
-  } = movie || {};
+  const { urlImgModal, title, description, movieRuntime, movieRating, id } = movie || {};
   const navigate = useNavigate();
   const colorFilmRating = (rating) => {
     switch (rating) {
@@ -46,7 +49,7 @@ const Modal = ({ movie, closeModal }) => {
 
   const handleFavButton = () => {
     if (fav === false) {
-      movieToFav(userSession, {id:movie._id});
+      movieToFav(userSession, { id: movie._id });
       setFav(true);
     } else {
       removeMovieFromFav(userSession, movie._id);
@@ -54,12 +57,26 @@ const Modal = ({ movie, closeModal }) => {
     }
   };
 
-  const handleClick = () => {
-    navigate('/player');
+  const handleWatchLaterButton = () => {
+    if (watch === false) {
+      movieToWatchLater(userSession, { id: movie._id });
+      setWatch(true);
+    } else {
+      removeMovieFromWatchLater(userSession, movie._id);
+      setWatch(false);
+    }
   };
-  useEffect(()=>{
-    if(favMovies) setFav(favMovies.includes(movie?._id))
-  }, [favMovies])
+
+  const handleClick = () => {
+    navigate('/player', { state: { movie } });
+  };
+  useEffect(() => {
+    if (favMovies) setFav(favMovies.includes(movie?._id));
+  }, [favMovies, watchMovies]);
+  useEffect(() => {
+    if (watchMovies) setWatch(watchMovies.includes(movie?._id));
+  }, [watchMovies]);
+
   return (
     <>
       <div className="wrapperModalOverlay">
@@ -81,12 +98,7 @@ const Modal = ({ movie, closeModal }) => {
 
             <p>{colorFilmRating(movieRating)}</p>
             <FavButton id={id} className="favStar" setFav={handleFavButton} favState={fav} />
-            <WatchLaterButton
-              id={id}
-              className="eyeButton"
-              setWatchLater={addToWatchLater}
-              watchLaterState={includedInWatchLater}
-            />
+            <WatchLaterButton id={id} className="eyeButton" setWatch={handleWatchLaterButton} watchState={watch} />
             <button className="playFilm" type="button" onClick={handleClick}>
               PLAY 🎥
             </button>

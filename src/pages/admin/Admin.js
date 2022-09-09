@@ -199,6 +199,7 @@ const Admin = ({ name, label, rules, helperText, multilinie }) => {
               <MuiTextFieldController control={control} name="director" label="Director" />
               <MuiTextFieldController control={control} name="urlImgMovie" label="Url Image Movie" />
               <MuiTextFieldController control={control} name="urlImgModal" label="Url Image Modal" />
+              <MuiTextFieldController control={control} name="urlTrailer" label="Url Trailer" />
               <MuiTextFieldController
                 control={control}
                 name="runtime"

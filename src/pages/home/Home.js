@@ -4,7 +4,7 @@ import Category from '../../components/category/category';
 import api from '../../utils/api';
 import CarouselShow from '../../components/carousel/CarouselShow';
 
-function Home({favMovies}) {
+function Home({ favMovies }) {
   const [movies, setMovies] = useState([]);
   const [refresh, setRefresh] = useState(false);
   const [categories, setCategories] = useState([]);
