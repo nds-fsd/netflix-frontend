@@ -16,11 +16,13 @@ const CarouselShow = (props) => {
   // useRef is kinda document.queryselector in JS
   const carousel = useRef();
   useEffect(() => {
+    console.log('dentro');
     if (carousel.current) {
       setWidth(Number(carousel.current?.scrollWidth) - Number(carousel.current?.offsetWidth));
     }
     // carousel -d is added to recalculate after every resize
-  }, []);
+  }, [carousel, movies]);
+
   //! This is for check!
   const handleModal = async () => {
     setModalOpen(!modalOpen);
@@ -59,17 +61,18 @@ const CarouselShow = (props) => {
           stateFav={fav}
         />
       )}
-        <motion.div
-            ref={carousel} className="innerCarousel" whileTap={{ cursor: 'grabbing' }}
-          // drag makes the motion of sliding, x means horizontal
-          drag="x"
-          dragConstraints={{ right: 0, left: -width }}
-          >
-          {movies.map((movie) => (
-            <motion.div className="item" key={movie._id} onClick={handleModal}>
-              <Card movie={{...movie, isFav: false}} />
-            </motion.div>
-          ))}
+      <motion.div
+        ref={carousel}
+        className="innerCarousel"
+        whileTap={{ cursor: 'grabbing' }}
+        // drag makes the motion of sliding, x means horizontal
+        drag="x"
+        dragConstraints={{ right: 0, left: -width }}>
+        {movies.map((movie) => (
+          <motion.div className="item" key={movie._id} onClick={handleModal}>
+            <Card movie={{ ...movie, isFav: false }} />
+          </motion.div>
+        ))}
       </motion.div>
     </div>
   ) : (

@@ -1,20 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { IconButton } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import CloseIcon from '@mui/icons-material/Close';
 import ReactPlayer from 'react-player';
 import Fullscreen from 'fullscreen-react';
 import styles from './Player.module.css';
 
-const Player = () => {
+const Player = ({ state }) => {
   const navigate = useNavigate();
+  const data = useLocation();
   const [isPlaying, setIsPlaying] = useState(false);
   const [isEnter, setIsEnter] = useState(false);
 
   useEffect(() => {
     setIsEnter(true);
   }, []);
-
+  console.log(data.state.movie.urlTrailer);
   // la url tiene que llamar al backend para traerse la direcion del video en cuestion.
 
   const handleClosePlayer = () => {
@@ -34,7 +35,7 @@ const Player = () => {
           <CloseIcon />
         </IconButton>
         <ReactPlayer
-          url="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+          url={data.state.movie.urlTrailer}
           playing
           controls
           loop

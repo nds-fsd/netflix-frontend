@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './Card.css';
 import Modal from '../modal/Modal';
 
-const Card = ({ movie }) => {
+const Card = ({ movie, updateMovies }) => {
   const { urlImgMovie, title, id } = movie || {};
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -12,7 +12,7 @@ const Card = ({ movie }) => {
 
   return (
     <>
-      {modalOpen && <Modal id={id} movie={movie} closeModal={handleModal} />}
+      {modalOpen && <Modal id={id} movie={movie} closeModal={handleModal} updateMovies={updateMovies} />}
       <div className="wrapperCard" onClick={handleModal}>
         <div className="wrapperImg">
           <img src={urlImgMovie} alt={title} />

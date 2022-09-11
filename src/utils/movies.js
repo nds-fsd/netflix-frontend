@@ -16,6 +16,11 @@ const getFavMovies = async (userSession) => {
   return response;
 };
 
+const getWatchLaterMovies = async (userSession) => {
+  const response = await api('get', `user/${userSession.user.id}/watchlater`);
+  return response;
+};
+
 const movieToFav = async (userSession, body) => {
   api('POST', `user/${userSession.user.id}/favs`, { body })
     .then((res) => {
@@ -26,6 +31,17 @@ const movieToFav = async (userSession, body) => {
     });
 };
 
+const movieToWatchLater = async (userSession, body) =>
+  api('POST', `user/${userSession.user.id}/watchlater`, { body })
+    .then((res) => {
+      console.log(res.favs);
+      return true;
+    })
+    .catch((e) => {
+      console.error(e);
+      return false;
+    });
+
 const removeMovieFromFav = async (userSession, movie) => {
   api('DELETE', `user/${userSession.user.id}/favs/${movie}`)
     .then((res) => {
@@ -35,6 +51,17 @@ const removeMovieFromFav = async (userSession, movie) => {
       console.error(e);
     });
 };
+
+const removeMovieFromWatchLater = async (userSession, movie) =>
+  api('DELETE', `user/${userSession.user.id}/watchlater/${movie}`)
+    .then((res) => {
+      console.log(res.favs);
+      return true;
+    })
+    .catch((e) => {
+      console.error(e);
+      return false;
+    });
 
 const appendMovieToBBDD = async (body) => api('POST', 'movies', { body });
 
@@ -48,8 +75,11 @@ const getMovieByParams = async (string) => api('GET', `movies?name=${string}`);
 
 export {
   movieToFav,
+  movieToWatchLater,
   removeMovieFromFav,
+  removeMovieFromWatchLater,
   getFavMovies,
+  getWatchLaterMovies,
   appendMovieToBBDD,
   deleteMovieFormBBDD,
   getMovieById,
