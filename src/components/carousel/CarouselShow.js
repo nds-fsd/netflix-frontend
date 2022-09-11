@@ -16,11 +16,13 @@ const CarouselShow = (props) => {
   // useRef is kinda document.queryselector in JS
   const carousel = useRef();
   useEffect(() => {
+    console.log('dentro');
     if (carousel.current) {
       setWidth(Number(carousel.current?.scrollWidth) - Number(carousel.current?.offsetWidth));
     }
     // carousel -d is added to recalculate after every resize
-  }, []);
+  }, [carousel, movies]);
+
   //! This is for check!
   const handleModal = async () => {
     setModalOpen(!modalOpen);

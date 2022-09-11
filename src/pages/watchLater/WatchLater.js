@@ -9,17 +9,21 @@ const WatchLaterList = () => {
   const [watchLater, setWatchLater] = useState([]);
 
   useEffect(() => {
+    getMovies();
+  }, []);
+
+  const getMovies = () => {
     getWatchfromBack(user).then((response) => {
       setWatchLater(response.map((item) => item.movie));
     });
-  }, [watchLater]);
+  };
 
   return (
     <div className={styles.FavList}>
       <h2 className={styles.Title}>Watch later movies </h2>
       <div className={styles.ListContainer}>
         {watchLater?.map((movie) => (
-          <Card movie={movie} />
+          <Card movie={movie} updateMovies={getMovies} />
         ))}
       </div>
     </div>

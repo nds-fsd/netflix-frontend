@@ -13,18 +13,24 @@ import {
 } from '../../utils/movies';
 import { getUserSession } from '../../utils/sesion';
 
-const Modal = ({ movie, closeModal }) => {
+const Modal = ({ movie, closeModal, updateMovies }) => {
   const [favMovies, setFavMovies] = useState([]);
   const [watchMovies, setWatchMovies] = useState([]);
   const [fav, setFav] = useState(false);
   const [watch, setWatch] = useState(false);
   const userSession = getUserSession();
+
   React.useEffect(() => {
     getFavMovies(userSession).then((response) => {
       setFavMovies(response.map((responseMovie) => responseMovie._id));
     });
     getWatchLaterMovies(userSession).then((response) => {
-      setWatchMovies(response.map((responseMovie) => responseMovie._id));
+      setWatchMovies(
+        response.map((responseMovie) => ({
+          movie: responseMovie.movie._id,
+          _id: responseMovie._id,
+        })),
+      );
     });
   }, []);
 
@@ -55,15 +61,23 @@ const Modal = ({ movie, closeModal }) => {
       removeMovieFromFav(userSession, movie._id);
       setFav(false);
     }
+    getWatchLaterMovies(userSession).then((response) => {
+      setWatchMovies(response.map((responseMovie) => responseMovie.movie._id));
+    });
   };
 
   const handleWatchLaterButton = () => {
     if (watch === false) {
-      movieToWatchLater(userSession, { id: movie._id });
-      setWatch(true);
+      movieToWatchLater(userSession, { id: movie._id }).then((data) => {
+        setWatch(data);
+        updateMovies();
+      });
     } else {
-      removeMovieFromWatchLater(userSession, movie._id);
-      setWatch(false);
+      const toDelete = watchMovies.find((item) => item.movie === movie._id)?._id;
+      removeMovieFromWatchLater(userSession, toDelete).then((data) => {
+        setWatch(!data);
+        updateMovies();
+      });
     }
   };
 
@@ -72,10 +86,15 @@ const Modal = ({ movie, closeModal }) => {
   };
   useEffect(() => {
     if (favMovies) setFav(favMovies.includes(movie?._id));
-  }, [favMovies, watchMovies]);
+  }, [favMovies]);
+
   useEffect(() => {
-    if (watchMovies) setWatch(watchMovies.includes(movie?._id));
+    console.log(watchMovies);
+    console.log(movie);
+    if (watchMovies.find((item) => item.movie === movie?._id)) setWatch(true);
   }, [watchMovies]);
+
+  console.log(watch);
 
   return (
     <>

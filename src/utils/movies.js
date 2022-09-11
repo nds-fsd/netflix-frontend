@@ -31,15 +31,16 @@ const movieToFav = async (userSession, body) => {
     });
 };
 
-const movieToWatchLater = async (userSession, body) => {
+const movieToWatchLater = async (userSession, body) =>
   api('POST', `user/${userSession.user.id}/watchlater`, { body })
     .then((res) => {
       console.log(res.favs);
+      return true;
     })
     .catch((e) => {
       console.error(e);
+      return false;
     });
-};
 
 const removeMovieFromFav = async (userSession, movie) => {
   api('DELETE', `user/${userSession.user.id}/favs/${movie}`)
@@ -51,15 +52,16 @@ const removeMovieFromFav = async (userSession, movie) => {
     });
 };
 
-const removeMovieFromWatchLater = async (userSession, movie) => {
+const removeMovieFromWatchLater = async (userSession, movie) =>
   api('DELETE', `user/${userSession.user.id}/watchlater/${movie}`)
     .then((res) => {
       console.log(res.favs);
+      return true;
     })
     .catch((e) => {
       console.error(e);
+      return false;
     });
-};
 
 const appendMovieToBBDD = async (body) => api('POST', 'movies', { body });
 
