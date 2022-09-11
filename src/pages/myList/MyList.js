@@ -1,7 +1,28 @@
-import React from 'react'
+import React, { useState } from 'react';
+import Card from '../../components/card/Card';
+import styles from './myList.module.css';
+import { getFavMovies } from '../../utils/movies';
+import { getUserSession } from '../../utils/sesion';
 
 const MyList = () => {
-  return <div>LIST</div>
-}
+  const userSession = getUserSession();
+  const [favMovies, setFavMovies] = useState();
 
-export default MyList
+  React.useEffect(() => {
+    getFavMovies(userSession).then((response) => {
+      setFavMovies(response);
+    });
+  }, [favMovies]);
+
+  return (
+    <div className={styles.FavList}>
+      <h2 className={styles.Title}>My favourite movies </h2>
+      <div className={styles.ListContainer}>
+        {favMovies?.map((movie) => (
+          <Card movie={movie} />
+        ))}
+      </div>
+    </div>
+  );
+};
+export default MyList;

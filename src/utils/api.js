@@ -1,24 +1,25 @@
-import { getToken } from './sesion'
+import { getToken } from './sesion';
 
 const API_URL =
+
   window.location.hostname === 'fakeflix-nuclio.netlify.app'
     ? 'https://fakeflix-nucli.herokuapp.com'
     : 'http://localhost:3001'
 
 // Custom API error to throw
 function ApiError(message, data, status) {
-  let response = null
+  let response = null;
 
   // We are trying to parse response
   try {
-    response = JSON.parse(data)
+    response = JSON.parse(data);
   } catch (e) {
-    response = data
+    response = data;
   }
 
-  this.response = response
-  this.message = response.message ? response.message : message
-  this.status = status
+  this.response = response;
+  this.message = response.message ? response.message : message;
+  this.status = status;
 }
 
 // API wrapper function
@@ -27,12 +28,12 @@ const api = (method = 'GET', path, userOptions = {}, query) => {
   const defaultOptions = {
     mode: 'cors',
     method,
-  }
+  };
   // Define default headers
   const defaultHeaders = {
     'content-type': 'application/json',
     authorization: `Bearer ${getToken()}`,
-  }
+  };
 
   const options = {
     // Merge options
@@ -43,31 +44,31 @@ const api = (method = 'GET', path, userOptions = {}, query) => {
       ...defaultHeaders,
       ...userOptions.headers,
     },
-  }
+  };
 
   // Build Url
-  let url = `${API_URL}/${path}`
+  const url = `${API_URL}/${path}`;
 
   // Detect is we are uploading a file
-  const isFile = options.body instanceof File
+  const isFile = options.body instanceof File;
 
   // Stringify JSON data
   // If body is not a file
   if (options.body && typeof options.body === 'object' && !isFile) {
-    options.body = JSON.stringify(options.body)
+    options.body = JSON.stringify(options.body);
   }
 
   // Variable which will be used for storing response
-  let response = null
+  let response = null;
 
   return (
     fetch(url, options)
       .then((responseObject) => {
         // Saving response for later use in lower scopes
-        response = responseObject
+        response = responseObject;
 
         // Get response as json
-        return response.json()
+        return response.json();
       })
       // "parsedResponse" will be either text or javascript object depending if
       // "response.text()" or "response.json()" got called in the upper scope
@@ -75,26 +76,22 @@ const api = (method = 'GET', path, userOptions = {}, query) => {
         // Check for HTTP error codes
         if (response.status < 200 || response.status >= 300) {
           // Throw error
-          throw parsedResponse
+          throw parsedResponse;
         }
 
         // Request succeeded
-        return parsedResponse
+        return parsedResponse;
       })
       .catch((error) => {
         // Throw custom API error
         // If response exists it means HTTP error occured
         if (response) {
-          throw new ApiError(
-            `Request failed with status ${response.status}.`,
-            error,
-            response.status
-          )
+          throw new ApiError(`Request failed with status ${response.status}.`, error, response.status);
         } else {
-          throw new ApiError(error.toString(), null, 'REQUEST_FAILED')
+          throw new ApiError(error.toString(), null, 'REQUEST_FAILED');
         }
       })
-  )
-}
+  );
+};
 
-export default api
+export default api;

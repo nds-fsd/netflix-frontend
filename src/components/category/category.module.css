@@ -1,0 +1,19 @@
+.Categorias {
+  background-color: rgb(30, 30, 30);
+  color: white;
+  font-size: 30px;
+  font-weight: bold; 
+  padding: 10px;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  display: flex;
+  justify-content: flex-start;
+  padding-left: 4vh;
+  color: white;
+}
+
+.CategoryMovie {
+  background-color: black;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+}

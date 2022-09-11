@@ -1,5 +1,7 @@
 export const setStorageItem = (name, data) => {
   const stringData = JSON.stringify(data);
+
+  console.trace();
   localStorage.setItem(name, stringData);
 };
 

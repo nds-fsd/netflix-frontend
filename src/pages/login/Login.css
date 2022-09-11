@@ -1,6 +1,7 @@
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 @import url('https://fonts.googleapis.com/css?family=Rubik:400,500&display=swap');
-
 
 body {
   font-family: 'Rubik', sans-serif;
@@ -11,14 +12,14 @@ body {
   height: 100vh;
 }
 
-.logo1{
+.logo1 {
   text-align: left;
   color: #000;
 }
 
 .logo2 {
   text-align: left;
-  color: #FCA311;
+  color: #fca311;
 }
 
 .left {
@@ -43,8 +44,6 @@ body {
   background-position: center;
 }
 
-
-
 .header > h2 {
   margin: 0;
   color: #4f46a5;
@@ -54,7 +53,7 @@ body {
   margin-top: 10px;
   font-weight: normal;
   font-size: 15px;
-  color: rgba(0,0,0,.4);
+  color: rgba(0, 0, 0, 0.4);
 }
 
 .form {
@@ -79,7 +78,7 @@ body {
   border-radius: 4px;
   font-family: 'Rubik', sans-serif;
   outline: 0;
-  transition: .2s;
+  transition: 0.2s;
   margin-top: 20px;
 }
 
@@ -90,7 +89,7 @@ body {
 .form > button {
   padding: 12px 10px;
   border: 0;
-  background: linear-gradient(to right, #FCA311 0%,#4f46a5 100%); 
+  background: linear-gradient(to right, #fca311 0%, #4f46a5 100%);
   border-radius: 3px;
   margin-top: 10px;
   color: #fff;
@@ -100,7 +99,7 @@ body {
 
 .animation {
   animation-name: move;
-  animation-duration: .4s;
+  animation-duration: 0.4s;
   animation-fill-mode: both;
   animation-delay: 2s;
 }

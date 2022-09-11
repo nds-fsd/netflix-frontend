@@ -1,49 +1,37 @@
-import React from 'react'
-import Card from '../../components/card/Card'
-import '../../components/card/Card.css'
-import { useState, useEffect } from 'react'
-import api from '../../utils/api'
+import React, { useState, useEffect } from 'react';
+import '../../components/card/Card.css';
+import Category from '../../components/category/category';
+import api from '../../utils/api';
+import CarouselShow from '../../components/carousel/CarouselShow';
 
-function Home() {
-  const [movies, setMovies] = useState([])
-  const [refresh, setRefresh] = useState(false)
+function Home({ favMovies }) {
+  const [movies, setMovies] = useState([]);
+  const [refresh, setRefresh] = useState(false);
+  const [categories, setCategories] = useState([]);
 
   const refreshListMovies = () => {
-    setRefresh(!refresh)
-  }
-  
+    setRefresh(!refresh);
+  };
+
   useEffect(() => {
-    api("GET", 'movies').then((movies) => setMovies(movies));
-  }, [refresh])
-  
+    api('GET', 'movies').then((moviesData) => setMovies(moviesData));
+    api('GET', 'category').then((dataCategory) => setCategories(dataCategory));
+  }, [refresh]);
+
+  // const categoriesPlus = [
+  //   { categoryName: 'Action', movies },
+  //   { categoryName: 'Horror', movies },
+  //   { categoryName: 'Comedy', movies },
+  //   { categoryName: 'Drama', movies },
+  // ];
   return (
-    <div>
-      HOME
-      <div className='filmContainer'>
-        {movies && movies.map(
-          ({
-            _id,
-            prj_title,
-            prj_urlImgMovie,
-            prj_urlImgModal,
-            prj_description,
-            prj_rating,
-            prj_runtime,
-          }) => (
-            <Card
-              refreshListMovies={() => refreshListMovies()}
-              id={_id}
-              urlImgMovieCard={prj_urlImgMovie}
-              title={prj_title}
-              urlImgModal={prj_urlImgModal}
-              movieDescription={prj_description}
-              movieRating={prj_rating}
-              movieRuntime={prj_runtime}
-            />
-          )
-        )}
-      </div>
+    <div className="homeFakeflix">
+      <div className="allMovies">ALL MOVIES</div>
+      <CarouselShow movies={movies} />
+      {categories.map(({ _id, title, description }) => (
+        <Category id={_id} titleCategory={title} descriptionCategory={description} />
+      ))}
     </div>
-  )
+  );
 }
 export default Home;
