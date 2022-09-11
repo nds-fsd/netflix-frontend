@@ -1,10 +1,9 @@
 import { getToken } from './sesion';
 
 const API_URL =
-
   window.location.hostname === 'fakeflix-nuclio.netlify.app'
     ? 'https://fakeflix-nucli.herokuapp.com'
-    : 'http://localhost:3001'
+    : 'http://localhost:3001';
 
 // Custom API error to throw
 function ApiError(message, data, status) {
