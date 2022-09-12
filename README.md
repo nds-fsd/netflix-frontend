@@ -1,70 +1,80 @@
-# Getting Started with Create React App
+# FakeFlix
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<img width="942" alt="Fakeflix" src="https://user-images.githubusercontent.com/102693351/189606785-7834279c-f2ee-4b31-8121-f380e129e969.png">
 
-## Available Scripts
 
-In the project directory, you can run:
+Los alumnos del bootcamp de Full Stack Developer de Nuclio Digital School como proyecto final hemos creado la aplicación web FakeFlix con la ayuda de todos los conocimientos adquiridos en el máster. \
+ El objetivo de nuestra aplicación web es crear una plataforma de visualización de películas donde cada usuario puede registrarse y acceder de manera individualizada a su sesión, donde podrá encontrar las películas disponibles en nuestra base de datos categorizadas según su género cinematográfico. Así como la funcionalidad de escoger que películas son sus favoritas para poder acceder a ellas de manera fácil.
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Descripción técnica Frontend 
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+La plataforma web se ha desarrollado mediante  **Javascript** y su librería  **React**.
 
-### `npm test`
+## Descripción técnica Backend 
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Las tecnologías que hemos aplicado en nuestra aplicación son: **node js**, **mongoDB** y **express**
 
-### `npm run build`
+### Acceso a la aplicación web
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+La  URL accesible es: https://fakeflix-nuclio.netlify.app \
+\
+Para utilizarla de manera local se puede realizar siguiendo estos pasos:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+####  Instalación
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Para instalar y ejecutar este proyecto en local tanto en Fronted y Backend se deben realizar las siguientes acciones:
+1.	 Clonar el repositorio mediante
+2.	Una vez clonado el repositorio se debe instalar las dependencias para un buen funcionamiento del proyecto con:\
+**npm install**
 
-### `npm run eject`
+3.	Y, por último mediante el siguiente comando nuestra aplicación se levantará en https://localhost:3001. \
+**npm start**
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Librerias utilizadas 
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### En Frontend
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+"@emotion/react": "^11.10.4", \
+    "@emotion/styled": "^11.10.4", \
+    "@fortawesome/free-solid-svg-icons": "^6.1.1", \
+    "@fortawesome/react-fontawesome": "^0.2.0", \
+    "@mui/icons-material": "^5.8.4", \
+    "@mui/material": "^5.10.3", \
+    "@testing-library/jest-dom": "^5.16.4", \
+    "@testing-library/react": "^13.3.0", \
+    "@testing-library/user-event": "^13.5.0", \
+    "framer-motion": "^7.2.1", \
+    "fullscreen-react": "^1.0.5", \
+    "react": "^18.1.0", \
+    "react-datepicker": "^4.8.0", \
+    "react-dom": "^18.1.0", \
+    "react-hook-form": "^7.32.1", \
+    "react-player": "^2.10.1", \
+    "react-router-dom": "^6.3.0", \
+    "react-scripts": "5.0.1", \
+    "web-vitals": "^2.1.4"
+  },
 
-## Learn More
+### En Backend
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+ "bcryptjs": "^2.4.3", \
+    "cors": "^2.8.5", \
+    "dotenv": "^16.0.1", \
+    "express": "^4.18.1", \
+    "express-jwt": "^7.7.5", \
+    "jsonwebtoken": "^8.5.1", \
+    "mongoose": "^6.4.4",\
+    "nock": "^13.2.7",
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### Analyzing the Bundle Size
+## Alumnos
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Arian Collado \
+Oscar Reyes \
+Alejandra Sabater \
+Noemí Portillo 
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
